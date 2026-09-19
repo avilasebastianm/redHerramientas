@@ -106,6 +106,15 @@ h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;backg
 .btn.rosa{background:var(--rosa);border-color:var(--rosa);color:#fff}.btn.rosa:hover{background:transparent;color:var(--rosa)}
 .btn.wa{background:transparent;border-color:var(--verde);color:var(--verde-osc);margin-left:6px}.btn.wa:hover{background:var(--verde);color:#fff}
 
+/* QR solo en escritorio; en móvil, botón flotante de WhatsApp */
+.wa-fab{display:none}
+@media(max-width:800px){
+  .qr,.contacto .wa{display:none}
+  .wa-fab{display:grid;place-items:center;position:fixed;right:16px;bottom:16px;width:58px;height:58px;border-radius:50%;background:#25d366;box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:30}
+  .wa-fab svg{width:32px;height:32px;fill:#fff}
+  footer{padding-bottom:90px}
+}
+
 footer{background:#070712;color:#cfcfd8;padding:36px 0;font-size:.92rem}
 footer a{color:#fff}
 footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
@@ -247,5 +256,9 @@ footer img{height:44px}
     <span><a href="https://www.redherramientas.com/p/1-politicas-de-cookies-si-quieres-saber.html">Cookies y privacidad</a> · <a href="https://www.redherramientas.com/">Sitio actual</a></span>
   </div>
 </footer>
+
+<a class="wa-fab" href="#pendiente-whatsapp-link" aria-label="Hablar por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z"/></svg>
+</a>
 </body>
 </html>
