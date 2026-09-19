@@ -31,7 +31,18 @@ nav a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;fo
 nav a:hover{background:var(--linea)}
 nav .donar{background:var(--rosa);color:#fff}
 nav .donar:hover{background:var(--rosa-osc)}
-@media(max-width:760px){.bar{flex-direction:column}nav ul{justify-content:center}}
+nav a{white-space:nowrap}
+@media(max-width:1100px){
+  header.top{position:static}
+  .bar{flex-direction:column;gap:8px}
+  nav ul{justify-content:center}
+}
+@media(max-width:640px){
+  .bar{align-items:stretch;padding:10px 12px}
+  .bar>a{align-self:center}
+  nav ul{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  nav li{flex:none}
+}
 
 /* hero */
 .hero{background:linear-gradient(135deg,var(--bordo),#a3124a 55%,#e0345f);color:#fff;padding:64px 0 72px}
