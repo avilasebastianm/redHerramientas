@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -228,6 +229,58 @@ class LandingPage extends StatelessWidget {
 // SECCIONES PRINCIPALES
 // ==========================================
 
+// Modelo de datos para las Noticias
+class NewsArticle {
+  final String imageUrl;
+  final String caption;
+  final String kicker;
+  final String headline;
+  final String summary;
+  final String expandedText;
+  final String buttonText;
+
+  NewsArticle({
+    required this.imageUrl,
+    required this.caption,
+    required this.kicker,
+    required this.headline,
+    required this.summary,
+    required this.expandedText,
+    required this.buttonText,
+  });
+}
+
+// Lista global de noticias para el carrusel
+final List<NewsArticle> carouselNews = [
+  NewsArticle(
+    imageUrl: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800',
+    caption: 'Participantes del programa en un taller práctico.',
+    kicker: 'INICIATIVA / #ClicSeguroEnRED',
+    headline: 'Tecnología y seguridad digital facilitado por y para personas mayores',
+    summary: 'Un espacio impulsado para reducir la brecha digital y la de usabilidad, para promover el uso seguro y autónomo de la tecnología entre personas mayores.',
+    expandedText: 'Los facilitadores somos también mujeres mayores, lo que conlleva empatía necesaria para generar clima de seguridad. Hablamos de autonomía tecnológica que les permita dejar de pedir ayuda para las tareas cotidianas relacionadas con la tecnología, como pedir un turno médico o escanear una receta.',
+    buttonText: 'IR A LA NOTA',
+  ),
+  NewsArticle(
+    imageUrl: 'https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=800',
+    caption: 'Encuentro anual sobre autonomía física y digital.',
+    kicker: 'EVENTO / Comunidad',
+    headline: 'Próxima jornada de alfabetización y autonomía tecnológica',
+    summary: 'Únete a nuestra próxima charla donde abordaremos los desafíos comunes al usar aplicaciones bancarias y de salud en el día a día.',
+    expandedText: 'Durante la jornada contaremos con la participación de expertas en seguridad informática que nos guiarán paso a paso en la configuración de privacidad de WhatsApp, prevención de estafas telefónicas y gestión de contraseñas seguras. Te esperamos.',
+    buttonText: 'IR A LA NOTA',
+  ),
+  NewsArticle(
+    imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800',
+    caption: 'Grupo de estudio sobre uso de herramientas cotidianas.',
+    kicker: 'EDUCACIÓN / Talleres',
+    headline: 'Abiertas las inscripciones para el nuevo taller de Redes Sociales',
+    summary: 'Aprende a comunicarte, subir fotos y compartir momentos con tu familia de manera segura, privada y sin intermediarios.',
+    expandedText: 'Este curso tiene una duración de 4 semanas. Nos enfocaremos en plataformas como Facebook e Instagram, prestando especial atención a cómo identificar perfiles falsos y cómo configurar la cuenta para que solo nuestros seres queridos puedan ver nuestra información personal.',
+    buttonText: 'VER CRONOGRAMA',
+  ),
+];
+
 class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
 
@@ -236,7 +289,146 @@ class HeroSection extends StatefulWidget {
 }
 
 class _HeroSectionState extends State<HeroSection> {
-  bool _isExpanded = false;
+  final PageController _pageController = PageController(viewportFraction: 0.95);
+  int _currentPage = 0;
+  int? _expandedIndex;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoPlay();
+  }
+
+  void _startAutoPlay() {
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      if (_expandedIndex != null) return; // No gira si hay una tarjeta abierta leyendo
+      
+      int nextPage = _currentPage + 1;
+      if (nextPage >= carouselNews.length) {
+        nextPage = 0;
+      }
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDesktop = MediaQuery.of(context).size.width > 800;
+    
+    // Alturas flexibles para que quepa todo sin problemas visuales
+    double baseHeight = isDesktop ? 680 : 720;
+    double expandedHeight = isDesktop ? 880 : 950;
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            "Últimas Noticias y Novedades",
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              color: AppColors.dominant,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        
+        // Contenedor principal del Carrusel
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeInOut,
+          height: _expandedIndex != null ? expandedHeight : baseHeight,
+          child: PageView.builder(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                _currentPage = index;
+                _expandedIndex = null; // Cierra la nota al cambiar de tarjeta
+              });
+            },
+            itemCount: carouselNews.length,
+            itemBuilder: (context, index) {
+              bool isExpanded = _expandedIndex == index;
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: isDesktop ? 16.0 : 4.0),
+                child: NewsCard(
+                  article: carouselNews[index],
+                  isExpanded: isExpanded,
+                  onExpandToggle: () {
+                    setState(() {
+                      if (_expandedIndex == index) {
+                        _expandedIndex = null;
+                      } else {
+                        _expandedIndex = index;
+                      }
+                    });
+                  },
+                ),
+              );
+            },
+          ),
+        ),
+        
+        const SizedBox(height: 24),
+        
+        // Barra de desplazamiento (Indicadores / Puntos)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(carouselNews.length, (index) {
+            bool isActive = _currentPage == index;
+            return GestureDetector(
+              onTap: () {
+                _pageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.symmetric(horizontal: 6.0),
+                height: 12,
+                width: isActive ? 32 : 12, // El activo es gris oscuro y más largo
+                decoration: BoxDecoration(
+                  color: isActive ? Colors.grey.shade800 : Colors.grey.shade400,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+}
+
+class NewsCard extends StatelessWidget {
+  final NewsArticle article;
+  final bool isExpanded;
+  final VoidCallback onExpandToggle;
+
+  const NewsCard({
+    super.key, 
+    required this.article,
+    required this.isExpanded,
+    required this.onExpandToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -251,14 +443,13 @@ class _HeroSectionState extends State<HeroSection> {
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Imagen estilo noticia con epígrafe superpuesto
+          // Imagen superior estática con epígrafe
           Stack(
             children: [
               Image.network(
-                'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1000', // Imagen placeholder (mujeres adultas tecnología)
-                height: 400,
+                article.imageUrl,
+                height: 280,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
@@ -267,7 +458,7 @@ class _HeroSectionState extends State<HeroSection> {
                 left: 0,
                 right: 0,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.black.withOpacity(0.85), Colors.transparent],
@@ -276,95 +467,85 @@ class _HeroSectionState extends State<HeroSection> {
                     ),
                   ),
                   child: Text(
-                    "Participantes del programa en un taller práctico de tecnología.", // Epígrafe pequeño
-                    style: GoogleFonts.roboto(color: Colors.white, fontSize: 16, fontStyle: FontStyle.italic),
+                    article.caption,
+                    style: GoogleFonts.roboto(color: Colors.white, fontSize: 15, fontStyle: FontStyle.italic),
                   ),
                 ),
               ),
             ],
           ),
           
-          Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Etiqueta (Kicker) en color distintivo
-                Text(
-                  "INICIATIVA / #ClicSeguroEnRED",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.separatorBar, letterSpacing: 1),
-                ),
-                const SizedBox(height: 16),
-                
-                // Titular de la "Noticia"
-                Text(
-                  "Tecnología, seguridad digital e inteligencia artificial facilitado por y para personas mayores",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontSize: 34, 
-                    fontWeight: FontWeight.w900, 
-                    color: AppColors.dominant,
-                    height: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                
-                // Bajada (Siempre visible)
-                Text(
-                  "Un espacio impulsado por Red de Herramientas entre Mujeres para reducir la brecha digital y la de usabilidad, para promover el uso seguro y autónomo de la tecnología entre personas mayores obligadas por el contexto a una inmersión a un ecosistema tecnológico, sosteniendo relación entre tecnología, aprendizaje y derecho.",
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 22, fontWeight: FontWeight.w500),
-                ),
-                
-                // Párrafos ocultos/expandibles
-                if (_isExpanded) ...[
-                  const SizedBox(height: 24),
+          // Contenido protegido con scroll interno si fuera necesario
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
-                    "Los facilitadores, docentes de tecnología, somos también mujeres mayores, lo que conlleva la empatía necesaria para generar el clima de seguridad y confianza entre los participantes para poder mostrar sus inquietudes, dudas. El trabajo entre pares ayuda a desarrollar confianza en sus propias habilidades y conocimientos. La participación activa y la sensación de pertenencia a un grupo aumenta la motivación y el compromiso con el aprendizaje.\n\n"
-                    "Eso se lleva al segundo diferencial, el enfoque, no se habla desde lo procedimental de las aplicaciones, se habla desde las necesidades del quehacer cotidiano, se centra en la construcción activa del conocimiento, donde los participantes no solo reciben información, sino que también la procesan y la aplican a través de la interacción con sus compañeros.\n\n"
-                    "Hablamos de autonomía tecnológica, que les permita dejar de pedir ayuda para las tareas cotidianas relacionadas con la tecnología, como pedir un turno médico, escanear una receta y enviarlas, etc. Enfocamos la autonomía física, tomando como emergente las propias limitaciones que nos vamos encontrando al envejecer, por ej leer cómodamente la letra minúscula de las etiquetas nutricionales de los alimentos con una lupa digital instalada en el celular, todo esto, en todos los sentidos autonomía tecnológica, emocional y física.",
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    article.kicker,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.separatorBar, letterSpacing: 1),
+                  ),
+                  const SizedBox(height: 12),
+                  
+                  Text(
+                    article.headline,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w900, 
+                      color: AppColors.dominant,
+                      height: 1.2,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  Text(
+                    article.summary,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  
+                  if (isExpanded) ...[
+                    const SizedBox(height: 16),
+                    Text(
+                      article.expandedText,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 18),
+                    ),
+                  ],
+                  
+                  const SizedBox(height: 8),
+                  
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton.icon(
+                      onPressed: onExpandToggle,
+                      icon: Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, size: 24),
+                      label: Text(
+                        isExpanded ? "Ver menos" : "Ver más", 
+                        style: const TextStyle(fontSize: 18)
+                      ),
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColors.accent,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                    ),
+                  ),
+                  
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Divider(),
+                  ),
+                  
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 60),
+                        backgroundColor: AppColors.dominant,
+                      ),
+                      child: Text(article.buttonText, style: const TextStyle(fontSize: 18, letterSpacing: 1.2)),
+                    ),
                   ),
                 ],
-                
-                const SizedBox(height: 16),
-                
-                // Botón expandir/contraer
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton.icon(
-                    onPressed: () {
-                      setState(() {
-                        _isExpanded = !_isExpanded;
-                      });
-                    },
-                    icon: Icon(_isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, size: 28),
-                    label: Text(
-                      _isExpanded ? "Leer menos" : "Leer nota completa", 
-                      style: const TextStyle(fontSize: 20)
-                    ),
-                    style: TextButton.styleFrom(
-                      foregroundColor: AppColors.accent,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                    ),
-                  ),
-                ),
-                
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 24.0),
-                  child: Divider(),
-                ),
-                
-                // Botón original Call To Action
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 70), // Ocupa todo el ancho
-                      backgroundColor: AppColors.dominant,
-                    ),
-                    child: const Text("SUMATE A NUESTRA COMUNIDAD", style: TextStyle(fontSize: 20, letterSpacing: 1.5)),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],
