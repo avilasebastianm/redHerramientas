@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red de Herramientas Entre Mujeres — Propuesta de Home</title>
+<meta name="description" content="Propuesta (draft) de reordenamiento de la home de Red de Herramientas Entre Mujeres: ejes, #ClicSeguroEnRED, novedades y revista colaborativa.">
+<style>
+:root{
+  --rosa:#e0345f; --rosa-osc:#b3204a; --verde:#2e9e4f; --verde-osc:#1f7a3a;
+  --bordo:#660828; --tinta:#2b2b33; --suave:#6a6a74; --fondo:#fff8fa; --card:#ffffff; --linea:#f0dbe2;
+  --r:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tinta);background:var(--fondo);line-height:1.6;font-size:17px}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--verde);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:0;background:#000;color:#fff;padding:8px 14px;z-index:99}.skip:focus{left:8px;top:8px}
+
+/* draft ribbon */
+.draft{background:var(--bordo);color:#fff;font-size:14px;text-align:center;padding:8px 16px}
+
+/* header */
+header.top{background:var(--card);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:20}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;max-width:1120px;margin:0 auto}
+.bar img{height:52px;width:auto;display:block}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+nav a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:15px}
+nav a:hover{background:var(--linea)}
+nav .donar{background:var(--rosa);color:#fff}
+nav .donar:hover{background:var(--rosa-osc)}
+@media(max-width:760px){.bar{flex-direction:column}nav ul{justify-content:center}}
+
+/* hero */
+.hero{background:linear-gradient(135deg,var(--bordo),#a3124a 55%,#e0345f);color:#fff;padding:64px 0 72px}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.18);padding:4px 14px;border-radius:999px;font-weight:600;font-size:14px;letter-spacing:.04em}
+.hero h1{font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.08;margin:16px 0 12px}
+.hero p{font-size:1.2rem;max-width:44ch;margin:0 0 28px}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;background:#fff;color:var(--bordo);border:2px solid #fff}
+.btn:hover{background:transparent;color:#fff}
+.btn.sec{background:transparent;color:#fff;margin-left:8px}.btn.sec:hover{background:#fff;color:var(--bordo)}
+.btn.verde{background:var(--verde-osc);border-color:var(--verde-osc);color:#fff}.btn.verde:hover{background:transparent;color:var(--verde-osc)}
+
+section{padding:56px 0}
+h2{font-size:clamp(1.6rem,3.5vw,2.1rem);margin:0 0 6px;line-height:1.2}
+.lead{color:var(--suave);margin:0 0 28px;max-width:60ch}
+h2::after{content:"";display:block;width:56px;height:4px;border-radius:2px;background:var(--verde);margin-top:10px}
+
+/* ejes */
+.ejes{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:900px){.ejes{grid-template-columns:repeat(2,1fr)}}
+.eje{position:relative;aspect-ratio:1/1.1;border-radius:var(--r);overflow:hidden;text-decoration:none;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;isolation:isolate;transition:transform .2s}
+.eje:hover{transform:translateY(-4px)}
+.eje .ico{position:absolute;top:14px;right:16px;font-size:2.2rem;opacity:.9}
+.eje strong{font-size:1.5rem;line-height:1.1;text-transform:uppercase;letter-spacing:.08em;font-weight:800;overflow-wrap:anywhere}
+.eje small{display:block;margin-top:8px;font-size:.9rem;opacity:.95;line-height:1.35}
+.eje::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,.05) 65%)}
+.e-salud{background:linear-gradient(135deg,#7a5c2e,#c9a24b)}
+.e-cultura{background:linear-gradient(135deg,#2b2320,#7a5a44)}
+.e-derechos{background:linear-gradient(135deg,#5a1a86,#c04bb0)}
+.e-ambiente{background:linear-gradient(135deg,#14532d,#4fae5a)}
+.chip{display:inline-block;background:#fff;color:var(--bordo);font-size:.72rem;font-weight:800;border-radius:999px;padding:2px 10px;margin-top:8px;text-transform:uppercase;letter-spacing:.05em}
+
+/* clic seguro */
+.clic{background:var(--card);border-block:1px solid var(--linea)}
+.clic-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+@media(max-width:860px){.clic-grid{grid-template-columns:1fr}}
+.clic p{margin:0 0 14px}
+.clic details{border:1px solid var(--linea);border-radius:12px;padding:10px 16px;margin:4px 0 18px}
+.clic summary{cursor:pointer;font-weight:700;color:var(--verde-osc)}
+.props{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:10px}
+.props li{background:var(--fondo);border:1px solid var(--linea);border-radius:12px;padding:12px 16px;font-weight:600}
+.props span{margin-right:10px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--linea);border-radius:var(--r);padding:20px;text-decoration:none;display:block;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 8px 24px rgba(102,8,40,.15);transform:translateY(-3px)}
+.card .i{font-size:1.8rem}
+.card h3{margin:8px 0 4px;font-size:1.05rem;line-height:1.3}
+.card p{margin:0;color:var(--suave);font-size:.92rem}
+.recursos{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 32px}
+.recursos a{padding:10px 18px;border-radius:999px;border:2px solid var(--verde);font-weight:700;text-decoration:none;color:var(--verde-osc)}
+.recursos a:hover{background:var(--verde);color:#fff}
+
+/* revista + novedades */
+.revista{background:linear-gradient(100deg,var(--verde-osc),#3fb463);color:#fff;border-radius:22px;padding:36px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+@media(max-width:700px){.revista{grid-template-columns:1fr}}
+.revista h2{color:#fff}.revista h2::after{background:#fff}
+.revista p{margin:0;max-width:50ch}
+.revista .btn{color:var(--verde-osc)}.revista .btn:hover{color:#fff}
+
+.nov{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.nov article{background:var(--card);border:1px solid var(--linea);border-radius:var(--r);padding:20px}
+.nov time{font-size:.82rem;font-weight:700;color:var(--rosa-osc);text-transform:uppercase;letter-spacing:.05em}
+.nov h3{margin:6px 0;font-size:1.1rem}
+.nov p{margin:0;color:var(--suave);font-size:.94rem}
+
+/* contacto */
+.contacto{display:flex;flex-wrap:wrap;gap:24px;align-items:center;background:var(--card);border:1px solid var(--linea);border-radius:22px;padding:28px}
+.qr{width:112px;height:112px;border:2px dashed var(--linea);border-radius:12px;display:grid;place-items:center;text-align:center;font-size:.75rem;color:var(--suave);padding:8px}
+.contacto .txt{flex:1;min-width:220px}
+.contacto h3{margin:0 0 4px}
+.contacto p{margin:0 0 12px;color:var(--suave)}
+.btn.rosa{background:var(--rosa);border-color:var(--rosa);color:#fff}.btn.rosa:hover{background:transparent;color:var(--rosa)}
+.btn.wa{background:transparent;border-color:var(--verde);color:var(--verde-osc);margin-left:6px}.btn.wa:hover{background:var(--verde);color:#fff}
+
+footer{background:#070712;color:#cfcfd8;padding:36px 0;font-size:.92rem}
+footer a{color:#fff}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+footer img{height:44px}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="draft">Borrador de propuesta para la comisión · los enlaces marcados “pendiente” esperan confirmación</div>
+
+<header class="top">
+  <div class="bar">
+    <a href="#"><img src="https://i.imgur.com/CFM0Pcr.png" alt="Red de Herramientas — Asociación Civil IGJ 1981600" width="299" height="68"></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#ejes">Ejes</a></li>
+        <li><a href="#clic-seguro">#ClicSeguroEnRED</a></li>
+        <li><a href="#novedades">Novedades</a></li>
+        <li><a href="#revista">Revista</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a class="donar" href="#contacto">Donar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <span class="tag">#ClicSeguroEnRED</span>
+    <h1>Tecnología, seguridad digital e inteligencia artificial para personas mayores.</h1>
+    <p>Facilitado por personas mayores. Un espacio de Red de Herramientas Entre Mujeres.</p>
+    <a class="btn" href="#clic-seguro">Conocé el espacio</a>
+    <a class="btn sec" href="#contacto">Sumate a la comunidad</a>
+  </div>
+</section>
+
+<section id="ejes">
+  <div class="wrap">
+    <h2>Nuestros ejes</h2>
+    <p class="lead">Cuatro grandes temas para encontrar rápido lo que buscás, en un solo clic.</p>
+    <div class="ejes">
+      <a class="eje e-salud" href="#pendiente-salud"><span class="ico" aria-hidden="true">🌿</span><strong>Salud y Bienestar</strong><small>Actividad física y cuidado personal</small></a>
+      <a class="eje e-cultura" href="#clic-seguro"><span class="ico" aria-hidden="true">🎭</span><strong>Educación y Cultura</strong><small>Enredos de Película · ClicSeguroEnRED</small><span class="chip">Nuevo</span></a>
+      <a class="eje e-derechos" href="#pendiente-derechos"><span class="ico" aria-hidden="true">⚖️</span><strong>Derechos</strong><small>Derecho a tener derechos, leyes y proyectos</small></a>
+      <a class="eje e-ambiente" href="#pendiente-ambiente"><span class="ico" aria-hidden="true">🌱</span><strong>Medio Ambiente</strong><small>Incluye soberanía alimentaria · podcast de Marta</small></a>
+    </div>
+  </div>
+</section>
+
+<section class="clic" id="clic-seguro">
+  <div class="wrap">
+    <div class="clic-grid">
+      <div>
+        <h2>¿Qué es #ClicSeguroEnRED?</h2>
+        <p class="lead">Reducir la brecha digital y la de usabilidad.</p>
+        <p>Un espacio impulsado por Red de Herramientas entre Mujeres para promover el uso seguro y autónomo de la tecnología entre personas mayores obligadas por el contexto a una inmersión en un ecosistema tecnológico, sosteniendo la relación entre tecnología, aprendizaje y derecho.</p>
+        <p>Los facilitadores, docentes de tecnología, somos también mujeres mayores: la empatía necesaria para generar un clima de seguridad y confianza. El trabajo entre pares desarrolla confianza en las propias habilidades, y la sensación de pertenencia aumenta la motivación y el compromiso con el aprendizaje.</p>
+        <details>
+          <summary>Nuestro enfoque: autonomía tecnológica, emocional y física</summary>
+          <p style="margin-top:10px">No hablamos desde lo procedimental de las aplicaciones sino desde las necesidades del quehacer cotidiano: construcción activa del conocimiento, procesándolo y aplicándolo con los compañeros.</p>
+          <p>Autonomía para dejar de pedir ayuda en tareas como sacar un turno médico, escanear una receta y enviarla. Y autonomía física: por ejemplo, leer cómodamente la letra minúscula de las etiquetas nutricionales con una lupa digital en el celular.</p>
+        </details>
+        <a class="btn rosa" href="#contacto">Sumate a nuestra comunidad</a>
+      </div>
+      <div>
+        <h3>Nuestras propuestas</h3>
+        <ul class="props">
+          <li><span aria-hidden="true">📱</span>Talleres y capacitaciones</li>
+          <li><span aria-hidden="true">🔒</span>Consejos de seguridad digital</li>
+          <li><span aria-hidden="true">🤖</span>Inteligencia artificial para la vida cotidiana</li>
+          <li><span aria-hidden="true">🎙️</span>Contenidos audiovisuales</li>
+          <li><span aria-hidden="true">📚</span>Guías y materiales descargables</li>
+        </ul>
+        <h3>Recursos destacados</h3>
+        <div class="recursos">
+          <a href="#pendiente-lictips">Lic Tips</a>
+          <a href="#pendiente-grabaciones">Grabaciones</a>
+          <a href="#pendiente-drive">Material en Drive</a>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:44px">Empezá por acá</h3>
+    <div class="cards">
+      <a class="card" href="#pendiente-estafas"><div class="i" aria-hidden="true">🛡️</div><h3>Cómo detectar estafas virtuales</h3><p>Señales para reconocerlas a tiempo.</p></a>
+      <a class="card" href="#pendiente-accesibilidad"><div class="i" aria-hidden="true">🔍</div><h3>Configuraciones de accesibilidad</h3><p>Letra grande, lupa y más.</p></a>
+      <a class="card" href="#pendiente-whatsapp"><div class="i" aria-hidden="true">💬</div><h3>Uso seguro de WhatsApp</h3><p>Privacidad y buenas prácticas.</p></a>
+      <a class="card" href="#pendiente-tutoriales"><div class="i" aria-hidden="true">🪜</div><h3>Tutoriales paso a paso</h3><p>Para hacerlo sin pedir ayuda.</p></a>
+      <a class="card" href="#pendiente-ia"><div class="i" aria-hidden="true">🤖</div><h3>Guías sobre inteligencia artificial</h3><p>IA para la vida cotidiana.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="novedades">
+  <div class="wrap">
+    <h2>Novedades</h2>
+    <p class="lead">Eventos, agenda y noticias de la asociación (reemplaza a “Publicaciones Populares”).</p>
+    <div class="nov">
+      <article><time>Próximamente</time><h3>Agenda de talleres #ClicSeguroEnRED</h3><p>Fechas y cupos, a confirmar.</p></article>
+      <article><time>Nuevo</time><h3>Podcast de Marta</h3><p>Medio ambiente y soberanía alimentaria.</p></article>
+      <article><time>Pendiente</time><h3>Conferencia y homenaje</h3><p>Contenido por subir al eje Medio Ambiente.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="revista" style="padding-top:0">
+  <div class="wrap">
+    <div class="revista">
+      <div>
+        <h2>Revista colaborativa</h2>
+        <p>Un espacio para armar entre todas: notas, miradas y experiencias de nuestra comunidad.</p>
+      </div>
+      <a class="btn" href="https://www.redherramientas.com/search/label/Revista%20colaborativa">Leer la revista</a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="padding-top:0">
+  <div class="wrap">
+    <div class="contacto">
+      <div class="qr" role="img" aria-label="Espacio para el código QR de WhatsApp">QR<br>(achicado)</div>
+      <div class="txt">
+        <h3>Comunicate con nosotras</h3>
+        <p>Sumate a la comunidad o ayudanos a sostener el espacio.</p>
+        <a class="btn rosa" href="#pendiente-donar">Donar</a>
+        <a class="btn wa" href="#pendiente-whatsapp-link">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="https://i.imgur.com/NQF8RJ4.png" alt="Red de Herramientas" width="299" height="68">
+    <span>Asociación Civil sin fines de lucro · IGJ N° 1981600</span>
+    <span><a href="https://www.redherramientas.com/p/1-politicas-de-cookies-si-quieres-saber.html">Cookies y privacidad</a> · <a href="https://www.redherramientas.com/">Sitio actual</a></span>
+  </div>
+</footer>
+</body>
+</html>
