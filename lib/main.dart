@@ -228,48 +228,144 @@ class LandingPage extends StatelessWidget {
 // SECCIONES PRINCIPALES
 // ==========================================
 
-class HeroSection extends StatelessWidget {
+class HeroSection extends StatefulWidget {
   const HeroSection({super.key});
+
+  @override
+  State<HeroSection> createState() => _HeroSectionState();
+}
+
+class _HeroSectionState extends State<HeroSection> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
-        color: AppColors.backgroundSecondary,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.dominant.withOpacity(0.2), width: 2),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade300),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
+        ],
       ),
+      clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("#ClicSeguroEnRED", style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontSize: 40, color: AppColors.dominant)),
-          const SizedBox(height: 16),
-          Text(
-            "Tecnología, seguridad digital e inteligencia artificial para personas mayores facilitado por personas mayores.",
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.accent, fontSize: 24),
+          // Imagen estilo noticia con epígrafe superpuesto
+          Stack(
+            children: [
+              Image.network(
+                'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1000', // Imagen placeholder (mujeres adultas tecnología)
+                height: 400,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.black.withOpacity(0.85), Colors.transparent],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                  child: Text(
+                    "Participantes del programa en un taller práctico de tecnología.", // Epígrafe pequeño
+                    style: GoogleFonts.roboto(color: Colors.white, fontSize: 16, fontStyle: FontStyle.italic),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 32),
-          Text(
-            "¿Qué es #ClicSeguroEnRED?",
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 22),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            "Un espacio impulsado por Red de Herramientas entre Mujeres para reducir la brecha digital y la de usabilidad, para promover el uso seguro y autónomo de la tecnología entre personas mayores obligadas por el contexto a una inmersión a un ecosistema tecnológico, sosteniendo relación entre tecnología, aprendizaje y derecho.\n\n"
-            "Los facilitadores, docentes de tecnología, somos también mujeres mayores, lo que conlleva la empatía necesaria para generar el clima de seguridad y confianza entre los participantes para poder mostrar sus inquietudes, dudas. El trabajo entre pares ayuda a desarrollar confianza en sus propias habilidades y conocimientos. La participación activa y la sensación de pertenencia a un grupo aumenta la motivación y el compromiso con el aprendizaje.\n\n"
-            "Eso se lleva al segundo diferencial, el enfoque, no se habla desde lo procedimental de las aplicaciones, se habla desde las necesidades del quehacer cotidiano, se centra en la construcción activa del conocimiento, donde los participantes no solo reciben información, sino que también la procesan y la aplican a través de la interacción con sus compañeros.\n\n"
-            "Hablamos de autonomía tecnológica, que les permita dejar de pedir ayuda para las tareas cotidianas relacionadas con la tecnología, como pedir un turno médico, escanear una receta y enviarlas, etc. Enfocamos la autonomía física, tomando como emergente las propias limitaciones que nos vamos encontrando al envejecer, por ej leer cómodamente la letra minúscula de las etiquetas nutricionales de los alimentos con una lupa digital instalada en el celular, todo esto, en todos los sentidos autonomía tecnológica, emocional y física.",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 40),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(300, 70),
-              backgroundColor: AppColors.dominant,
+          
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Etiqueta (Kicker) en color distintivo
+                Text(
+                  "INICIATIVA / #ClicSeguroEnRED",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.separatorBar, letterSpacing: 1),
+                ),
+                const SizedBox(height: 16),
+                
+                // Titular de la "Noticia"
+                Text(
+                  "Tecnología, seguridad digital e inteligencia artificial facilitado por y para personas mayores",
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: 34, 
+                    fontWeight: FontWeight.w900, 
+                    color: AppColors.dominant,
+                    height: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                
+                // Bajada (Siempre visible)
+                Text(
+                  "Un espacio impulsado por Red de Herramientas entre Mujeres para reducir la brecha digital y la de usabilidad, para promover el uso seguro y autónomo de la tecnología entre personas mayores obligadas por el contexto a una inmersión a un ecosistema tecnológico, sosteniendo relación entre tecnología, aprendizaje y derecho.",
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 22, fontWeight: FontWeight.w500),
+                ),
+                
+                // Párrafos ocultos/expandibles
+                if (_isExpanded) ...[
+                  const SizedBox(height: 24),
+                  Text(
+                    "Los facilitadores, docentes de tecnología, somos también mujeres mayores, lo que conlleva la empatía necesaria para generar el clima de seguridad y confianza entre los participantes para poder mostrar sus inquietudes, dudas. El trabajo entre pares ayuda a desarrollar confianza en sus propias habilidades y conocimientos. La participación activa y la sensación de pertenencia a un grupo aumenta la motivación y el compromiso con el aprendizaje.\n\n"
+                    "Eso se lleva al segundo diferencial, el enfoque, no se habla desde lo procedimental de las aplicaciones, se habla desde las necesidades del quehacer cotidiano, se centra en la construcción activa del conocimiento, donde los participantes no solo reciben información, sino que también la procesan y la aplican a través de la interacción con sus compañeros.\n\n"
+                    "Hablamos de autonomía tecnológica, que les permita dejar de pedir ayuda para las tareas cotidianas relacionadas con la tecnología, como pedir un turno médico, escanear una receta y enviarlas, etc. Enfocamos la autonomía física, tomando como emergente las propias limitaciones que nos vamos encontrando al envejecer, por ej leer cómodamente la letra minúscula de las etiquetas nutricionales de los alimentos con una lupa digital instalada en el celular, todo esto, en todos los sentidos autonomía tecnológica, emocional y física.",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+                
+                const SizedBox(height: 16),
+                
+                // Botón expandir/contraer
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        _isExpanded = !_isExpanded;
+                      });
+                    },
+                    icon: Icon(_isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, size: 28),
+                    label: Text(
+                      _isExpanded ? "Leer menos" : "Leer nota completa", 
+                      style: const TextStyle(fontSize: 20)
+                    ),
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.accent,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+                
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24.0),
+                  child: Divider(),
+                ),
+                
+                // Botón original Call To Action
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 70), // Ocupa todo el ancho
+                      backgroundColor: AppColors.dominant,
+                    ),
+                    child: const Text("SUMATE A NUESTRA COMUNIDAD", style: TextStyle(fontSize: 20, letterSpacing: 1.5)),
+                  ),
+                ),
+              ],
             ),
-            child: const Text("SUMATE A NUESTRA COMUNIDAD", style: TextStyle(fontSize: 20, letterSpacing: 1.5)),
           ),
         ],
       ),
