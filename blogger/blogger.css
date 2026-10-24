@@ -159,3 +159,13 @@ a.chip-label:hover { background: var(--dominant-dark); }
 
 /* Sección oculta donde Blogger deja los gadgets del tema anterior */
 .rh-descartados { display: none; }
+
+/* Páginas armadas con el diseño del sitio (Contacto, Donar): todo el ancho, sin columna lateral */
+.post-layout:has(.rh-full),
+.post-layout.is-full {
+  display: block;
+  max-width: none;
+  padding: 0;
+}
+.post-layout:has(.rh-full) .post-aside,
+.post-layout.is-full .post-aside { display: none; }

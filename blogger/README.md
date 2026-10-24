@@ -8,7 +8,8 @@ python3 blogger/build.py
 
 Genera:
 - `tema-redherramientas.xml`: el tema.
-- `paginas/contacto.html` y `paginas/donar.html`: el contenido de esas dos páginas.
+- `paginas/donar.html`: el contenido de la página Donar (generado).
+- `paginas/contacto.html`: la página Contacto que armó Lucas en Blogger (copiada de ahí el 24/10, no se genera: si se cambia en Blogger, volver a copiarla).
 
 Los estilos que solo se usan en Blogger (posteos, listados y ajustes) están en `blogger.css`.
 

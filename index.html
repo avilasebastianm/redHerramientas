@@ -6,7 +6,7 @@
   <title>Red de Herramientas Entre Mujeres</title>
   <meta name="description" content="Asociación civil de mujeres adultas mayores dedicada a la lucha por la inclusión plena y el trato digno.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,500&family=Roboto:wght@400;500;600;700;900&display=swap">
   <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
@@ -27,6 +27,9 @@
       </nav>
 
       <div class="header-tools">
+        <button class="icon-btn search-btn" type="button" aria-controls="search" aria-expanded="false" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16a6.47 6.47 0 0 0 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
         <div class="font-size">
           <button class="icon-btn" type="button" aria-label="Tamaño de letra" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v7h3v-7h3V9H3v3z"/></svg>
@@ -44,6 +47,15 @@
         <button class="icon-btn menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menú">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
         </button>
+      </div>
+
+      <!-- Buscador: muestra resultados mientras se escribe (script.js) -->
+      <div class="search" id="search" hidden>
+        <form class="search-form" action="https://www.redherramientas.com/search" method="get" role="search">
+          <input class="search-input" type="search" name="q" placeholder="Buscar notas, libros, leyes..." aria-label="Buscar en el sitio" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
+          <button class="btn search-submit" type="submit">Buscar</button>
+        </form>
+        <div class="search-results" id="search-results" role="listbox" aria-label="Resultados" hidden></div>
       </div>
     </div>
   </header>

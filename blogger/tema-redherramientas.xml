@@ -7,7 +7,7 @@
 <b:include data='blog' name='all-head-content'/>
 <title><b:if cond='data:view.isHomepage'><data:blog.title.escaped/><b:else/><data:view.title.escaped/> | <data:blog.title.escaped/></b:if></title>
 <link href='https://fonts.googleapis.com' rel='preconnect'/>
-<link href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&amp;display=swap' rel='stylesheet'/>
+<link href='https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,500&amp;family=Roboto:wght@400;500;600;700;900&amp;display=swap' rel='stylesheet'/>
 <b:skin version='1.0.0'><![CDATA[/* Los estilos están en el <style> de abajo */]]></b:skin>
 <b:template-skin><![CDATA[
 body#layout .carousel, body#layout .to-top { display: none; }
@@ -231,9 +231,99 @@ a { color: inherit; }
 
 @media (max-width: 480px) {
   :root { --header-h: 72px; }
-  .header-inner { padding: 0 12px; gap: 4px; }
-  .logo img { height: 44px; }
-  .icon-btn, .whatsapp-btn { width: 40px; height: 40px; }
+  .header-inner { padding: 0 10px; gap: 4px; }
+  .logo { min-width: 0; flex-shrink: 1; }
+  .logo img { height: 40px; max-width: 100%; object-fit: contain; object-position: left center; }
+  .header-tools { gap: 2px; flex: none; }
+  .icon-btn, .whatsapp-btn { width: 38px; height: 38px; }
+  .icon-btn svg { width: 26px; height: 26px; }
+  .whatsapp-btn svg { width: 22px; height: 22px; }
+}
+
+/* ---------- Buscador (debajo del header, con resultados mientras se escribe) ---------- */
+
+.search {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 14px 24px 18px;
+  background: var(--white);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14);
+}
+.search[hidden] { display: none; }
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 18px;
+  border: 2px solid var(--dominant);
+  border-radius: 24px;
+  background: var(--bg);
+  font: inherit;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+.search-input:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+
+.search-results {
+  max-width: 760px;
+  max-height: min(60vh, 520px);
+  margin: 12px auto 0;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+}
+.search-results[hidden] { display: none; }
+
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+}
+.search-item:last-child { border-bottom: 0; }
+.search-item:hover,
+.search-item.active { background: #f6e9ec; }
+.search-item img {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f3e3e6;
+}
+.search-item strong { display: block; font-weight: 600; line-height: 1.3; }
+.search-item mark { background: #fbe3a0; color: inherit; border-radius: 2px; }
+.search-item small { display: block; margin-top: 2px; color: var(--muted); font-size: 0.9rem; }
+
+.search-status { margin: 0; padding: 14px 16px; color: var(--muted); }
+.search-all {
+  display: block;
+  padding: 12px 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  color: var(--dominant-dark);
+  background: #fff8fa;
+}
+.search-all:hover,
+.search-all.active { background: #f6e9ec; }
+
+@media (max-width: 480px) {
+  .search { padding: 10px 12px 14px; }
+  .search-submit { padding: 12px 16px; }
+  .search-item img { width: 52px; height: 52px; }
 }
 
 /* ---------- Separador (barra rosa entre secciones) ---------- */
@@ -355,32 +445,19 @@ a { color: inherit; }
 
 .slide-desc {
   margin: 0 0 24px;
+  font-size: 1.1rem;
+  font-style: italic;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
-
-/* "Ver más" despliega el texto completo y recién ahí aparece el enlace al posteo */
-.slide-full {
-  display: none;
-  overflow-y: auto;
-  margin-bottom: 20px;
-  padding-right: 8px;
-}
-.slide-full p { margin: 0 0 10px; }
-
-.slide.open .slide-desc { display: none; }
-.slide.open .slide-full { display: block; }
 
 .slide-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
-
-.slide-link { display: none; }
-.slide.open .slide-link { display: inline-block; }
 
 .carousel-arrow {
   position: absolute;
@@ -430,6 +507,466 @@ a { color: inherit; }
   .slide-box { left: 16px; right: 16px; bottom: 36px; padding: 18px; max-height: calc(100% - 60px); }
   .slide-box h2 { font-size: 1.35rem; }
   .carousel-arrow { top: 30%; }
+}
+
+/* ---------- Nota ampliada (se abre con "Ver más" en el carrusel) ---------- */
+
+.nota-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 5, 20, 0.75);
+}
+.nota-modal[hidden] { display: none; }
+html.nota-abierta { overflow: hidden; }
+
+.nota-panel {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 820px;
+  max-height: 100%;
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+/* La nota se desplaza con su propia barra al costado */
+.nota-scroll {
+  flex: 1;
+  overflow-y: scroll;
+  scrollbar-width: auto;
+  scrollbar-color: var(--dominant) #f3e3e6;
+}
+.nota-foto {
+  display: block;
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;  /* la foto entera, sin recortar caras ni textos */
+  background: #1b1320;
+}
+.nota-foto[hidden] { display: none; }
+.nota-content { padding: 32px 48px 32px; }
+.nota-foto[hidden] + .nota-content { padding-top: 40px; }
+.nota-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.nota-scroll::-webkit-scrollbar { width: 14px; }
+.nota-scroll::-webkit-scrollbar-track { background: #f3e3e6; }
+.nota-scroll::-webkit-scrollbar-thumb {
+  border: 3px solid #f3e3e6;
+  border-radius: 8px;
+  background: var(--dominant);
+}
+.nota-scroll::-webkit-scrollbar-thumb:hover { background: var(--dominant-dark); }
+
+.nota-close {
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--dominant);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+.nota-close:hover { background: var(--dominant-dark); }
+.nota-close svg { width: 26px; height: 26px; }
+
+.nota-title {
+  margin: 0 40px 12px 0;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.nota-epigrafe {
+  margin: 0 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--separator);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--muted);
+}
+.nota-body { font-size: 1.1rem; line-height: 1.65; overflow-wrap: anywhere; }
+.nota-body img { max-width: 100%; height: auto; border-radius: 8px; }
+.nota-body iframe, .nota-body video { max-width: 100%; }
+.nota-body a { color: var(--dominant-dark); }
+.nota-body .separator {
+  height: auto;
+  margin: 0 0 1em;
+  border-radius: 0;
+  background: none;
+}
+.nota-body .separator a { margin: 0 !important; }
+
+.nota-footer { margin: 28px 0 0; }
+.btn-outline-dark {
+  border: 2px solid var(--dominant);
+  background: transparent;
+  color: var(--dominant-dark);
+}
+.btn-outline-dark:hover { background: var(--dominant); color: var(--white); }
+
+@media (max-width: 800px) {
+  .nota-modal { padding: 10px; }
+  .nota-content { padding: 22px 20px 24px; }
+  .nota-foto { max-height: 45vh; }
+  .nota-close { right: 18px; }
+  .nota-title { font-size: 1.5rem; }
+  .nota-epigrafe { font-size: 1.1rem; }
+}
+
+/* ---------- Nota (posteo): diseño editorial con columna "Lo más leído" ---------- */
+/* Pensado para lectoras de 60+: letra grande, renglones cómodos, buen contraste y botones amplios */
+
+:root {
+  --serif: Lora, Georgia, 'Times New Roman', serif;
+  --ink: #1f1a22;
+  --ink-soft: #4a4250;
+  --rose-50: #fdf3f5;
+  --rose-100: #f6e4e8;
+}
+
+.post-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 56px;
+  align-items: start;
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+.post-aside { display: none; }
+.post-layout .post-aside { display: block; }
+
+.art { max-width: 780px; color: var(--ink); }
+.art-page { margin: 0 auto; padding: 32px 0 64px; }
+
+.art-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.art-crumbs a { color: var(--muted); text-decoration: none; }
+.art-crumbs a:hover { color: var(--dominant-dark); text-decoration: underline; }
+.art-crumbs .art-section { color: var(--dominant-dark); }
+.art-crumbs span { color: #c9bfc5; }
+
+.art-title {
+  margin: 0 0 18px;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 2.85rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.art-bajada {
+  margin: 0 0 26px;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.art-bajada[hidden] { display: none; }
+
+.art-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.art-byline { display: flex; align-items: center; gap: 12px; }
+.art-avatar {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--dominant);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.art-byline strong { display: block; font-size: 1.05rem; }
+.art-byline small { color: var(--muted); font-size: 0.98rem; }
+
+.art-share { display: flex; gap: 8px; }
+.share-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  text-decoration: none;
+}
+.share-icon svg { width: 24px; height: 24px; fill: currentColor; }
+.share-icon:hover { filter: brightness(0.92); }
+.share-icon.wa { background: var(--wa); }
+.share-icon.fb { background: #1877f2; }
+.share-icon.copy { background: var(--ink-soft); }
+
+.art-hero { margin: 0 0 32px; }
+.art-hero[hidden] { display: none; }
+.art-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;  /* la foto entera: tapas de libros, flyers y PDFs no se recortan */
+  border-radius: 14px;
+  background: var(--rose-100);
+}
+.art-hero figcaption,
+.art-body .tr-caption {
+  margin-top: 10px;
+  font-size: 0.98rem;
+  color: var(--muted);
+}
+
+/* Cuerpo de la nota */
+.art-body {
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+.art-body p { margin: 0 0 1.2em; }
+.art-body h2,
+.art-body h3 {
+  margin: 1.8em 0 0.6em;
+  font-family: var(--serif);
+  line-height: 1.25;
+  color: var(--ink);
+}
+.art-body h2 { font-size: 1.65rem; }
+.art-body h3 { font-size: 1.35rem; }
+.art-body h2::before {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 5px;
+  margin-bottom: 14px;
+  border-radius: 3px;
+  background: var(--separator);
+}
+.art-body a {
+  color: var(--dominant-dark);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.art-body img { max-width: 100%; height: auto; border-radius: 10px; }
+.art-body iframe, .art-body video { max-width: 100%; border-radius: 10px; }
+.art-body ul, .art-body ol { padding-left: 1.4em; margin: 0 0 1.3em; }
+.art-body li { margin-bottom: 0.5em; }
+.art-body li::marker { color: var(--dominant); font-weight: 700; }
+.art-body blockquote {
+  margin: 1.8em 0;
+  padding: 4px 0 4px 26px;
+  border-left: 5px solid var(--dominant);
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.art-body blockquote p:last-child { margin-bottom: 0; }
+.art-body a.art-doc {
+  display: inline-block;
+  margin: 4px 0;
+  padding: 12px 22px;
+  border-radius: 28px;
+  background: var(--dominant);
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.art-body a.art-doc:hover { background: var(--dominant-dark); }
+.art-body table.tr-caption-container { margin: 0 auto 1.2em; }
+
+/* Cierre de la nota */
+.art-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 36px 0 0;
+  font-weight: 700;
+}
+.art-tags a {
+  padding: 6px 16px;
+  border: 2px solid var(--dominant);
+  border-radius: 999px;
+  color: var(--dominant-dark);
+  font-size: 0.98rem;
+  text-decoration: none;
+}
+.art-tags a:hover { background: var(--dominant); color: var(--white); }
+
+.art-share-box {
+  margin: 32px 0 0;
+  padding: 26px 28px;
+  border-radius: 16px;
+  background: var(--rose-50);
+}
+.art-share-box h2 {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.art-share-box .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.share-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 28px;
+  color: var(--white);
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.share-big svg { width: 22px; height: 22px; fill: currentColor; }
+.share-big.wa { background: var(--wa); }
+.share-big.fb { background: #1877f2; }
+.share-big.copy { background: var(--ink-soft); }
+.share-big:hover { filter: brightness(0.92); }
+
+.art-related { margin-top: 48px; }
+.art-related[hidden] { display: none; }
+.block-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.block-title::before {
+  content: '';
+  width: 6px;
+  height: 1.3em;
+  border-radius: 3px;
+  background: var(--dominant);
+}
+.rel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rel-card { color: var(--ink); text-decoration: none; }
+.rel-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--rose-100);
+}
+.rel-card h3 {
+  margin: 10px 0 0;
+  font-family: var(--serif);
+  font-size: 1.12rem;
+  line-height: 1.35;
+}
+.rel-card:hover h3 { color: var(--dominant-dark); text-decoration: underline; }
+
+/* Columna lateral */
+.post-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+}
+.aside-card {
+  margin-bottom: 24px;
+  padding: 22px 22px 10px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--white);
+}
+.aside-card .block-title { font-size: 1.35rem; margin-bottom: 8px; }
+
+.mas-leido { margin: 0; padding: 0; list-style: none; counter-reset: ml; }
+.mas-leido li { counter-increment: ml; border-top: 1px solid var(--border); }
+.mas-leido li:first-child { border-top: 0; }
+.mas-leido a {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 72px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.mas-leido a::before {
+  content: counter(ml);
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--dominant);
+}
+.mas-leido span { font-weight: 600; font-size: 1.05rem; line-height: 1.35; }
+.mas-leido a:hover span { color: var(--dominant-dark); text-decoration: underline; }
+.mas-leido img {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--rose-100);
+}
+
+.aside-cta {
+  padding: 24px 22px;
+  border: 0;
+  background: var(--dominant);
+  color: var(--white);
+}
+.aside-cta h2 { margin: 0 0 8px; font-family: var(--serif); font-size: 1.35rem; }
+.aside-cta p { margin: 0 0 16px; font-size: 1.05rem; }
+.aside-cta .share-big { background: var(--white); color: var(--ink); }
+.aside-cta .share-big svg { fill: var(--wa); }
+
+@media (max-width: 1000px) {
+  .post-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .post-aside { position: static; }
+  .art { margin: 0 auto; }
+  .post-layout .post-aside { max-width: 780px; width: 100%; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  .post-layout { padding-top: 20px; }
+  .art-bajada { font-size: 1.2rem; }
+  .art-body { font-size: 1.15rem; }
+  .art-body blockquote { font-size: 1.25rem; padding-left: 18px; }
+  .rel-grid { grid-template-columns: 1fr; }
+  .rel-card { display: grid; grid-template-columns: 110px 1fr; gap: 14px; align-items: center; }
+  .rel-card h3 { margin: 0; }
+  .art-share-box { padding: 20px; }
 }
 
 /* ---------- Quiénes somos (mini sección) ---------- */
@@ -1059,6 +1596,16 @@ a.chip-label:hover { background: var(--dominant-dark); }
 /* Sección oculta donde Blogger deja los gadgets del tema anterior */
 .rh-descartados { display: none; }
 
+/* Páginas armadas con el diseño del sitio (Contacto, Donar): todo el ancho, sin columna lateral */
+.post-layout:has(.rh-full),
+.post-layout.is-full {
+  display: block;
+  max-width: none;
+  padding: 0;
+}
+.post-layout:has(.rh-full) .post-aside,
+.post-layout.is-full .post-aside { display: none; }
+
 /*]]>*/</style>
 </head>
 <body>
@@ -1082,6 +1629,9 @@ a.chip-label:hover { background: var(--dominant-dark); }
       </nav>
 
       <div class="header-tools">
+        <button class="icon-btn search-btn" type="button" aria-controls="search" aria-expanded="false" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16a6.47 6.47 0 0 0 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
         <div class="font-size">
           <button class="icon-btn" type="button" aria-label="Tamaño de letra" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 4v3h5v12h3V7h5V4H9zm-6 8h3v7h3v-7h3V9H3v3z"/></svg>
@@ -1099,6 +1649,15 @@ a.chip-label:hover { background: var(--dominant-dark); }
         <button class="icon-btn menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menú">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
         </button>
+      </div>
+
+      <!-- Buscador: muestra resultados mientras se escribe (script.js) -->
+      <div class="search" id="search" hidden="hidden">
+        <form class="search-form" action="/search" method="get" role="search">
+          <input class="search-input" type="search" name="q" placeholder="Buscar notas, libros, leyes..." aria-label="Buscar en el sitio" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false"/>
+          <button class="btn search-submit" type="submit">Buscar</button>
+        </form>
+        <div class="search-results" id="search-results" role="listbox" aria-label="Resultados" hidden="hidden"></div>
       </div>
     </div>
   </header>
@@ -1231,6 +1790,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
 
 </b:if>
 
+<div expr:class='data:view.isSingleItem ? &quot;post-layout container&quot; : &quot;&quot;'>
 <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
 <b:widget id='Blog1' locked='true' title='Entradas del blog' type='Blog' version='2' visible='true'>
 <b:includable id='main' var='this'>
@@ -1240,25 +1800,44 @@ a.chip-label:hover { background: var(--dominant-dark); }
         <!-- Páginas armadas con el diseño del sitio (Contacto, Donar): van completas -->
         <data:post.body/>
       <b:else/>
-        <article class='post-page'>
-          <div class='container narrow'>
-            <a class='post-back' expr:href='data:blog.homepageUrl'>&#8592; Volver al inicio</a>
-            <b:if cond='data:post.labels'>
-              <div class='post-labels'>
-                <b:loop values='data:post.labels' var='label'><a class='chip-label' expr:href='data:label.url'><data:label.name/></a></b:loop>
-              </div>
-            </b:if>
-            <h1 class='post-title'><b:eval expr='data:post.title ? data:post.title : &quot;Sin título&quot;'/></h1>
-            <b:if cond='data:view.isPost'><p class='post-date'><data:post.date/></p></b:if>
-            <div class='post-body'><data:post.body/></div>
-            <b:if cond='data:view.isPost'>
-              <div class='post-share'>
-                <span>Compartir:</span>
-                <a class='share-btn share-wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'>WhatsApp</a>
-                <a class='share-btn share-fb' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='noopener' target='_blank'>Facebook</a>
-              </div>
-            </b:if>
+        <!-- Notas y páginas: diseño editorial. La primera foto y el primer párrafo (bajada) los acomoda script.js -->
+        <article class='art'>
+          <nav aria-label='Ubicación' class='art-crumbs'>
+            <a expr:href='data:blog.homepageUrl'>Inicio</a>
+            <b:if cond='data:post.labels'><span aria-hidden='true'>/</span><a class='art-section' expr:href='data:post.labels.first.url'><data:post.labels.first.name/></a></b:if>
+          </nav>
+          <h1 class='art-title'><b:eval expr='data:post.title ? data:post.title : &quot;Sin título&quot;'/></h1>
+          <p class='art-bajada' hidden='hidden'/>
+          <div class='art-meta'>
+            <div class='art-byline'>
+              <span aria-hidden='true' class='art-avatar'>RH</span>
+              <div><strong>Red de Herramientas</strong><small><b:if cond='data:view.isPost'><data:post.date/> &#183; </b:if><span class='art-lectura'/></small></div>
+            </div>
+            <div class='art-share'>
+              <a aria-label='Compartir por WhatsApp' class='share-icon wa' data-share='wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z'/></svg></a>
+              <a aria-label='Compartir en Facebook' class='share-icon fb' data-share='fb' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M13.4 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.8v3h2.5V21z'/></svg></a>
+              <button aria-label='Copiar enlace' class='share-icon copy' data-share='copy' type='button'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z'/></svg></button>
+            </div>
           </div>
+          <figure class='art-hero' hidden='hidden'/>
+          <div class='post-body art-body'><data:post.body/></div>
+          <b:if cond='data:post.labels'>
+            <div class='art-tags'>Temas: <b:loop values='data:post.labels' var='label'><a expr:href='data:label.url'><data:label.name/></a></b:loop></div>
+          </b:if>
+          <div class='art-share-box'>
+            <h2>&#191;Te sirvió esta nota? Compartila</h2>
+            <div class='btns'>
+              <a class='share-big wa' data-share='wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z'/></svg>WhatsApp</a>
+              <a class='share-big fb' data-share='fb' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M13.4 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.8v3h2.5V21z'/></svg>Facebook</a>
+              <button class='share-big copy' data-share='copy' type='button'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z'/></svg><span class='label'>Copiar enlace</span></button>
+            </div>
+          </div>
+          <b:if cond='data:post.labels'>
+            <section class='art-related' expr:data-label='data:post.labels.first.name' hidden='hidden'>
+              <h2 class='block-title'>Seguí leyendo</h2>
+              <div class='rel-grid'/>
+            </section>
+          </b:if>
         </article>
       </b:if>
     </b:loop>
@@ -1292,7 +1871,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
             </a>
           </b:loop>
         </div>
-        <nav class='pager' aria-label='Más publicaciones'>
+        <nav aria-label='Más publicaciones' class='pager'>
           <b:if cond='data:newerPageUrl'><a class='btn btn-light' expr:href='data:newerPageUrl'>&#8592; Más nuevas</a></b:if>
           <b:if cond='data:olderPageUrl'><a class='btn' expr:href='data:olderPageUrl'>Más antiguas &#8594;</a></b:if>
         </nav>
@@ -1302,6 +1881,48 @@ a.chip-label:hover { background: var(--dominant-dark); }
 </b:includable>
 </b:widget>
 </b:section>
+<aside class='post-aside' aria-label='Recomendados'>
+<b:section class='aside-section' id='lateral' showaddelement='yes'>
+<b:widget id='PopularPosts1' locked='false' title='Lo más leído' type='PopularPosts' version='2' visible='true'>
+<b:widget-settings>
+  <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
+  <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+  <b:widget-setting name='showSnippets'>false</b:widget-setting>
+  <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
+</b:widget-settings>
+<b:includable id='main' var='this'>
+  <b:if cond='data:view.isSingleItem and !data:posts.empty'>
+    <div class='aside-card'>
+      <h2 class='block-title'><data:title/></h2>
+      <ol class='mas-leido'>
+        <b:loop values='data:posts' var='post'>
+          <li><a expr:href='data:post.url'>
+            <span><data:post.title/></span>
+            <b:if cond='data:post.featuredImage'>
+              <img alt='' expr:src='resizeImage(data:post.featuredImage, 144, &quot;1:1&quot;)' loading='lazy'/>
+            <b:else/>
+              <img alt='' src='https://i.imgur.com/CFM0Pcr.png' style='object-fit:contain'/>
+            </b:if>
+          </a></li>
+        </b:loop>
+      </ol>
+    </div>
+  </b:if>
+</b:includable>
+</b:widget>
+<b:widget id='HTML110' locked='false' title='Sumate (columna de las notas)' type='HTML' version='2' visible='true'>
+  <b:widget-settings>
+    <b:widget-setting name='content'><![CDATA[<div class="aside-card aside-cta">
+  <h2>¿Querés sumarte?</h2>
+  <p>Talleres, encuentros y actividades para mujeres mayores. Escribinos y te contamos.</p>
+  <a class="share-big" href="https://wa.me/5491122766776" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z"/></svg>Escribinos</a>
+</div>]]></b:widget-setting>
+  </b:widget-settings>
+  <b:includable id='main'><data:content/></b:includable>
+</b:widget>
+</b:section>
+</aside>
+</div>
 
 <b:if cond='data:view.isHomepage'>
     <!-- Llamado a la página de contacto -->
@@ -1394,6 +2015,12 @@ function setupHeader() {
   }
 
   menuBtn.addEventListener('click', function () {
+    var search = document.getElementById('search');
+    var searchBtn = document.querySelector('.search-btn');
+    if (search && !search.hidden) {
+      search.hidden = true;
+      if (searchBtn) searchBtn.setAttribute('aria-expanded', 'false');
+    }
     var isOpen = nav.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', String(isOpen));
   });
@@ -1448,6 +2075,377 @@ function setupFontSize() {
   });
 }
 
+// ---------- Buscador del header (resultados predictivos con el feed de Blogger) ----------
+var SEARCH_MAX = 8;
+
+function setupSearch() {
+  var panel = document.getElementById('search');
+  if (!panel) return;
+  var toggle = document.querySelector('.search-btn');
+  var form = panel.querySelector('.search-form');
+  var input = panel.querySelector('.search-input');
+  var results = document.getElementById('search-results');
+  var timer = null;
+  var lastQuery = '';
+  var active = -1;
+
+  form.action = BLOG_URL + '/search';
+
+  function open() {
+    // En pantallas chicas se cierra el menú para que no se superpongan
+    var nav = document.getElementById('nav');
+    var menuBtn = document.querySelector('.menu-btn');
+    if (nav) nav.classList.remove('open');
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+
+    panel.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+    input.focus();
+    if (input.value.trim().length >= 2) show();
+  }
+
+  function close() {
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+    hideResults();
+  }
+
+  function show() {
+    results.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+
+  function hideResults() {
+    results.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+    active = -1;
+  }
+
+  function status(text) {
+    results.innerHTML = '';
+    var p = document.createElement('p');
+    p.className = 'search-status';
+    p.textContent = text;
+    results.appendChild(p);
+    show();
+  }
+
+  function allLink(query) {
+    var a = document.createElement('a');
+    a.className = 'search-all';
+    a.id = 'search-opt-all';
+    a.setAttribute('role', 'option');
+    a.href = BLOG_URL + '/search?q=' + encodeURIComponent(query);
+    a.textContent = 'Ver todos los resultados para “' + query + '”';
+    return a;
+  }
+
+  // Resalta las palabras buscadas en el título
+  function highlight(el, text, query) {
+    var words = query.toLowerCase().split(/\s+/).filter(function (w) { return w.length > 1; });
+    var lower = text.toLowerCase();
+    var i = 0;
+    while (i < text.length) {
+      var best = -1, len = 0;
+      words.forEach(function (w) {
+        var k = lower.indexOf(w, i);
+        if (k !== -1 && (best === -1 || k < best)) { best = k; len = w.length; }
+      });
+      if (best === -1) { el.appendChild(document.createTextNode(text.slice(i))); break; }
+      if (best > i) el.appendChild(document.createTextNode(text.slice(i, best)));
+      var mark = document.createElement('mark');
+      mark.textContent = text.slice(best, best + len);
+      el.appendChild(mark);
+      i = best + len;
+    }
+  }
+
+  function render(items, query) {
+    results.innerHTML = '';
+    active = -1;
+    if (!items.length) {
+      status('No encontramos resultados para “' + query + '”.');
+      return;
+    }
+    items.forEach(function (item, i) {
+      var a = document.createElement('a');
+      a.className = 'search-item';
+      a.id = 'search-opt-' + i;
+      a.setAttribute('role', 'option');
+      a.href = item.url;
+
+      var img = document.createElement('img');
+      img.src = item.image;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.width = 64;
+      img.height = 64;
+
+      var text = document.createElement('span');
+      var title = document.createElement('strong');
+      highlight(title, item.title, query);
+      var meta = document.createElement('small');
+      meta.textContent = [item.label, item.date].filter(Boolean).join(' · ');
+      text.appendChild(title);
+      text.appendChild(meta);
+
+      a.appendChild(img);
+      a.appendChild(text);
+      results.appendChild(a);
+    });
+    results.appendChild(allLink(query));
+    show();
+  }
+
+  function search() {
+    var query = input.value.trim();
+    if (query === lastQuery) return;
+    lastQuery = query;
+    if (query.length < 2) { hideResults(); return; }
+    status('Buscando…');
+    searchPosts(query, function (items) {
+      if (query !== lastQuery) return;  // llegó tarde: ya se escribió otra cosa
+      if (items === null) status('No pudimos buscar ahora. Probá de nuevo en un rato.');
+      else render(items, query);
+    });
+  }
+
+  function move(step) {
+    var options = results.querySelectorAll('[role="option"]');
+    if (!options.length) return;
+    if (active >= 0) options[active].classList.remove('active');
+    active = (active + 1 + step + options.length + 1) % (options.length + 1) - 1;
+    if (active === -1) { input.removeAttribute('aria-activedescendant'); return; }
+    options[active].classList.add('active');
+    options[active].scrollIntoView({ block: 'nearest' });
+    input.setAttribute('aria-activedescendant', options[active].id);
+  }
+
+  toggle.addEventListener('click', function () {
+    if (panel.hidden) open(); else close();
+  });
+
+  input.addEventListener('input', function () {
+    clearTimeout(timer);
+    timer = setTimeout(search, 300);
+  });
+  input.addEventListener('focus', function () {
+    if (input.value.trim().length >= 2 && results.childNodes.length) show();
+  });
+
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (results.hidden && results.childNodes.length) show(); move(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+    else if (e.key === 'Enter' && active >= 0) {
+      e.preventDefault();
+      results.querySelectorAll('[role="option"]')[active].click();
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    if (input.value.trim().length < 2) e.preventDefault();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hidden) {
+      close();
+      toggle.focus();
+    }
+  });
+
+  // Tocar fuera del header cierra el buscador
+  document.addEventListener('click', function (e) {
+    if (!panel.hidden && !e.target.closest('.header')) close();
+  });
+}
+
+// Busca en el feed del blog (JSONP). Devuelve null si el blog no respondió
+function searchPosts(query, callback) {
+  var name = 'blogSearch' + Date.now() + Math.floor(Math.random() * 1000);
+  var script = document.createElement('script');
+  var timeout = setTimeout(function () { finish(null); }, 8000);
+
+  function finish(items) {
+    clearTimeout(timeout);
+    window[name] = function () {};
+    script.remove();
+    callback(items);
+  }
+
+  window[name] = function (data) {
+    var entries = (data && data.feed && data.feed.entry) || [];
+    finish(entries.map(function (entry) {
+      var link = (entry.link || []).filter(function (l) { return l.rel === 'alternate'; })[0];
+      var image = entry.media$thumbnail ? entry.media$thumbnail.url : '';
+      image = image.replace(/\/s\d+(-[a-z0-9-]+)?\//, '/s128-c/').replace(/=s\d+(-[a-z0-9-]+)?$/, '=s128-c');
+      var published = entry.published ? new Date(entry.published.$t) : null;
+      return {
+        title: entry.title.$t || 'Sin título',
+        url: link ? link.href : BLOG_URL,
+        image: image || 'https://i.imgur.com/CFM0Pcr.png',
+        label: entry.category && entry.category.length ? entry.category[0].term : '',
+        date: published && !isNaN(published) ? published.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' }) : ''
+      };
+    }));
+  };
+  script.onerror = function () { finish(null); };
+  script.src = BLOG_URL + '/feeds/posts/summary?alt=json-in-script&max-results=' + SEARCH_MAX +
+    '&q=' + encodeURIComponent(query) + '&callback=' + name;
+  document.head.appendChild(script);
+}
+
+// ---------- Nota (posteo): foto principal, bajada, tiempo de lectura, compartir y "Seguí leyendo" ----------
+var ICON_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z"/></svg>';
+
+function setupArticle() {
+  // Contacto y Donar van a todo el ancho (para navegadores sin :has)
+  var full = document.querySelector('.post-layout .rh-full');
+  if (full) full.closest('.post-layout').classList.add('is-full');
+
+  var art = document.querySelector('.art');
+  if (!art) return;
+  var body = art.querySelector('.art-body');
+  if (!body) return;
+
+  // 1) Foto principal: la primera imagen de la nota, si está al principio, pasa arriba con su epígrafe
+  var hero = art.querySelector('.art-hero');
+  var img = body.querySelector('img');
+  if (hero && img) {
+    var table = img.closest('table.tr-caption-container');
+    var block = table || img;
+    while (!table && block.parentNode !== body && block.parentNode.textContent.trim() === '') block = block.parentNode;
+    var before = document.createRange();
+    before.setStart(body, 0);
+    before.setEndBefore(block);
+    if (before.toString().trim().length < 400) {
+      var photo = document.createElement('img');
+      photo.src = img.src.replace(/\/s\d+(-[a-z0-9-]+)?\//, '/s1600/').replace(/=s\d+(-[a-z0-9-]+)?$/, '=s1600');
+      photo.alt = img.alt || '';
+      hero.appendChild(photo);
+      var caption = table ? table.querySelector('.tr-caption') : null;
+      if (caption && caption.textContent.trim()) {
+        var fc = document.createElement('figcaption');
+        fc.textContent = caption.textContent.trim();
+        hero.appendChild(fc);
+      }
+      removeWithEmptyParents(block, body);
+      hero.hidden = false;
+    }
+  }
+
+  // 2) Direcciones escritas como texto (notas viejas): se convierten en un botón para abrirlas
+  linkifyUrls(body);
+
+  // 3) Bajada: el primer párrafo de la nota (si es corto y no es solo un link)
+  var bajada = art.querySelector('.art-bajada');
+  var first = htmlToText(body.innerHTML)[0] || '';
+  if (bajada && first && first.length <= 350 && !/^https?:\/\//i.test(first)) {
+    var target = null;
+    body.querySelectorAll('*').forEach(function (el) {
+      if (el.textContent.trim() === first && (!target || target.contains(el))) target = el;
+    });
+    var onlyLink = target && (target.closest('a') ||
+      Array.prototype.some.call(target.querySelectorAll('a'), function (a) { return a.textContent.trim() === first; }));
+    if (target && !onlyLink && !target.querySelector('img, iframe')) {
+      removeWithEmptyParents(target, body);
+      bajada.textContent = first;
+      bajada.hidden = false;
+    }
+  }
+
+  // 4) Tiempo de lectura (unas 200 palabras por minuto)
+  var reading = art.querySelector('.art-lectura');
+  if (reading) {
+    var words = (body.textContent || '').trim().split(/\s+/).length;
+    reading.textContent = 'Lectura de ' + Math.max(1, Math.round(words / 200)) + ' min';
+  }
+
+  // 5) Compartir: WhatsApp y Facebook con el título y la dirección, y "Copiar enlace"
+  var url = (document.querySelector('link[rel="canonical"]') || {}).href || location.href;
+  var title = (art.querySelector('.art-title') || {}).textContent || document.title;
+  art.querySelectorAll('[data-share="wa"]').forEach(function (a) {
+    a.href = 'https://wa.me/?text=' + encodeURIComponent(title.trim() + ' ' + url);
+  });
+  art.querySelectorAll('[data-share="fb"]').forEach(function (a) {
+    a.href = 'https://www.facebook.com/sharer.php?u=' + encodeURIComponent(url);
+  });
+  art.querySelectorAll('[data-share="copy"]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var label = btn.querySelector('.label');
+      function done(ok) {
+        if (label) {
+          var original = label.dataset.text || (label.dataset.text = label.textContent);
+          label.textContent = ok ? '¡Enlace copiado!' : 'No se pudo copiar';
+          setTimeout(function () { label.textContent = original; }, 2500);
+        } else {
+          btn.setAttribute('aria-label', ok ? 'Enlace copiado' : 'No se pudo copiar');
+        }
+      }
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { done(true); }, function () { done(false); });
+      else done(false);
+    });
+  });
+
+  // 6) Seguí leyendo: otras notas de la misma etiqueta
+  var related = art.querySelector('.art-related');
+  if (related && related.dataset.label) {
+    var here = url.replace(/[?#].*$/, '').replace(/^https?:\/\/[^/]+/, '');
+    loadPosts(related.dataset.label, function (posts) {
+      posts = posts.filter(function (p) { return p.url.replace(/[?#].*$/, '').replace(/^https?:\/\/[^/]+/, '') !== here; }).slice(0, 3);
+      if (!posts.length) return;
+      var grid = related.querySelector('.rel-grid');
+      posts.forEach(function (p) {
+        var a = document.createElement('a');
+        a.className = 'rel-card';
+        a.href = p.url;
+        var im = document.createElement('img');
+        im.src = p.image;
+        im.alt = '';
+        im.loading = 'lazy';
+        var h = document.createElement('h3');
+        h.textContent = p.title;
+        a.appendChild(im);
+        a.appendChild(h);
+        grid.appendChild(a);
+      });
+      related.hidden = false;
+    });
+  }
+}
+
+// Convierte las direcciones escritas como texto en un botón ("Abrir el documento PDF", "Abrir el enlace")
+function linkifyUrls(root) {
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  var nodes = [];
+  var node;
+  while ((node = walker.nextNode())) {
+    if (/https?:\/\//i.test(node.nodeValue) && !node.parentNode.closest('a')) nodes.push(node);
+  }
+  nodes.forEach(function (textNode) {
+    var parts = textNode.nodeValue.split(/(https?:\/\/[^\s<>"]+)/i);
+    var frag = document.createDocumentFragment();
+    parts.forEach(function (part) {
+      if (!/^https?:\/\//i.test(part)) {
+        if (part) frag.appendChild(document.createTextNode(part));
+        return;
+      }
+      var url = part.replace(/[.,;:)]+$/, '');
+      var rest = part.slice(url.length);
+      var host = url.replace(/^https?:\/\/(www\.)?/i, '').split('/')[0];
+      var a = document.createElement('a');
+      a.className = 'art-doc';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = (/\.pdf($|[?#])/i.test(url) ? 'Abrir el documento PDF' : 'Abrir el enlace') + ' (' + host + ')';
+      frag.appendChild(a);
+      if (rest) frag.appendChild(document.createTextNode(rest));
+    });
+    textNode.parentNode.replaceChild(frag, textNode);
+  });
+}
+
 // ---------- Volver arriba ----------
 function setupToTop() {
   var btn = document.querySelector('.to-top');
@@ -1481,14 +2479,7 @@ function setupCarousel() {
     clearInterval(timer);
   }
 
-  function closeSlide(slide) {
-    if (!slide || !slide.classList.contains('open')) return;
-    slide.classList.remove('open');
-    slide.querySelector('.slide-more').textContent = 'Ver más';
-  }
-
   function goTo(index) {
-    closeSlide(slidesEl.children[current]);
     current = (index + total) % total;
     slidesEl.style.transform = 'translateX(-' + (current * 100) + '%)';
     for (var i = 0; i < total; i++) {
@@ -1499,6 +2490,16 @@ function setupCarousel() {
     play();
   }
 
+  // Abre la nota ampliada y pausa el carrusel hasta que se cierre
+  function open(item) {
+    paused = true;
+    stop();
+    openNota(item, function () {
+      paused = false;
+      play();
+    });
+  }
+
   function makeSlide(item) {
     var slide = document.createElement('article');
     slide.className = 'slide';
@@ -1506,7 +2507,11 @@ function setupCarousel() {
     var media = document.createElement('a');
     media.className = 'slide-media';
     media.href = item.url;
-    media.setAttribute('aria-label', 'Ver el posteo: ' + item.title);
+    media.setAttribute('aria-label', 'Ver la nota: ' + item.title);
+    media.addEventListener('click', function (e) {
+      e.preventDefault();
+      open(item);
+    });
     var blur = document.createElement('div');
     blur.className = 'blur';
     blur.style.backgroundImage = 'url("' + item.image + '")';
@@ -1521,44 +2526,25 @@ function setupCarousel() {
 
     var title = document.createElement('h2');
     title.textContent = item.title;
+    box.appendChild(title);
 
-    var desc = document.createElement('p');
-    desc.className = 'slide-desc';
-    desc.textContent = item.text[0];
-
-    var full = document.createElement('div');
-    full.className = 'slide-full';
-    item.text.forEach(function (t) {
-      var p = document.createElement('p');
-      p.textContent = t;
-      full.appendChild(p);
-    });
+    if (item.epigrafe) {
+      var desc = document.createElement('p');
+      desc.className = 'slide-desc';
+      desc.textContent = item.epigrafe;
+      box.appendChild(desc);
+    }
 
     var actions = document.createElement('div');
     actions.className = 'slide-actions';
-
     var more = document.createElement('button');
     more.type = 'button';
     more.className = 'btn slide-more';
     more.textContent = 'Ver más';
-    more.addEventListener('click', function () {
-      var isOpen = slide.classList.toggle('open');
-      more.textContent = isOpen ? 'Ver menos' : 'Ver más';
-      paused = isOpen;
-      if (isOpen) stop(); else play();
-    });
-
-    var link = document.createElement('a');
-    link.className = 'btn btn-outline slide-link';
-    link.href = item.url;
-    link.textContent = 'Leer el posteo completo';
-
+    more.addEventListener('click', function () { open(item); });
     actions.appendChild(more);
-    actions.appendChild(link);
-    box.appendChild(title);
-    box.appendChild(desc);
-    box.appendChild(full);
     box.appendChild(actions);
+
     slide.appendChild(media);
     slide.appendChild(box);
     return slide;
@@ -1601,7 +2587,7 @@ function setupCarousel() {
   loadPosts(CAROUSEL_LABEL, function (posts) {
     if (posts.length) return render(posts);
     loadPosts('', function (latest) {
-      render(latest.length ? latest : FALLBACK_SLIDES);
+      render(latest.length ? latest : FALLBACK_SLIDES.map(fallbackItem));
     });
   });
 }
@@ -1640,14 +2626,169 @@ function parseFeed(data) {
     // Las miniaturas vienen chicas (s72-c): se pide la versión de 1200px
     image = image.replace(/\/s\d+(-[a-z0-9-]+)?\//, '/w1200/').replace(/=s\d+(-[a-z0-9-]+)?$/, '=w1200');
 
-    var text = htmlToText(html);
+    var parts = splitNota(html);
     return {
       title: entry.title.$t,
-      text: text.length ? text : [entry.title.$t],
+      epigrafe: parts.epigrafe,
+      body: parts.body,
+      photo: image,
       image: image || 'https://i.imgur.com/CFM0Pcr.png',
       url: link ? link.href : BLOG_URL
     };
   });
+}
+
+// Diapositivas de ejemplo (texto plano) al mismo formato que los posteos
+function fallbackItem(item) {
+  var body = item.text.slice(1).map(function (t) {
+    var p = document.createElement('p');
+    p.textContent = t;
+    return p.outerHTML;
+  }).join('');
+  return { title: item.title, epigrafe: item.text[0], body: body, photo: item.image, image: item.image, url: item.url };
+}
+
+// Separa la nota: el primer párrafo es el epígrafe y el resto es la nota completa
+function splitNota(html) {
+  var lines = htmlToText(html);
+  var epigrafe = lines.length ? lines[0] : '';
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var body = doc.body;
+  body.querySelectorAll('script, style').forEach(function (el) { el.remove(); });
+
+  if (epigrafe) {
+    // El elemento más interno cuyo texto es justo el epígrafe (un <p>, un <div>, una negrita...)
+    var target = null;
+    body.querySelectorAll('*').forEach(function (el) {
+      if (el.textContent.trim() === epigrafe && (!target || target.contains(el))) target = el;
+    });
+    if (target) {
+      removeWithEmptyParents(target, body);
+    } else {
+      // Texto suelto, sin párrafos: se saca hasta el primer salto de línea
+      var walker = doc.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+      var node;
+      while ((node = walker.nextNode())) {
+        if (!node.nodeValue.trim()) continue;
+        if (node.nodeValue.trim() === epigrafe) {
+          var next = node.nextSibling;
+          while (next && next.nodeName === 'BR') {
+            var after = next.nextSibling;
+            next.remove();
+            next = after;
+          }
+          node.remove();
+        }
+        break;
+      }
+    }
+  }
+
+  // La primera foto se muestra arriba de la nota ampliada: se saca del cuerpo para no repetirla
+  var firstImg = body.querySelector('img');
+  if (firstImg) removeWithEmptyParents(firstImg, body);
+
+  // Los links de la nota se abren en otra pestaña para no perder la home
+  body.querySelectorAll('a[href]').forEach(function (a) {
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+  return { epigrafe: epigrafe, body: body.innerHTML.trim() };
+}
+
+// Saca un elemento y los contenedores que quedan vacíos (el párrafo o el bloque de la imagen)
+function removeWithEmptyParents(el, root) {
+  var parent = el.parentNode;
+  el.remove();
+  while (parent && parent !== root && !parent.textContent.trim() && !parent.querySelector('img, iframe, video')) {
+    var up = parent.parentNode;
+    parent.remove();
+    parent = up;
+  }
+}
+
+// ---------- Nota ampliada (ventana con barra de desplazamiento al costado) ----------
+var notaModal = null;
+
+function openNota(item, onClose) {
+  if (!notaModal) notaModal = buildNotaModal();
+  var m = notaModal;
+  m.photo.hidden = !item.photo;
+  if (item.photo) m.photo.src = item.photo; else m.photo.removeAttribute('src');
+  m.title.textContent = item.title;
+  m.epigrafe.textContent = item.epigrafe || '';
+  m.epigrafe.hidden = !item.epigrafe;
+  m.body.innerHTML = item.body || '';
+  m.link.href = item.url;
+  m.onClose = onClose;
+  m.lastFocus = document.activeElement;
+
+  m.el.hidden = false;
+  document.documentElement.classList.add('nota-abierta');
+  m.scroll.scrollTop = 0;
+  m.close.focus();
+}
+
+function closeNota() {
+  var m = notaModal;
+  if (!m || m.el.hidden) return;
+  m.el.hidden = true;
+  document.documentElement.classList.remove('nota-abierta');
+  m.body.innerHTML = '';  // corta videos que estuvieran reproduciéndose
+  if (m.lastFocus && m.lastFocus.focus) m.lastFocus.focus();
+  if (m.onClose) m.onClose();
+}
+
+function buildNotaModal() {
+  var el = document.createElement('div');
+  el.className = 'nota-modal';
+  el.hidden = true;
+  el.innerHTML =
+    '<div class="nota-panel" role="dialog" aria-modal="true" aria-labelledby="nota-titulo">' +
+      '<button class="nota-close" type="button" aria-label="Cerrar la nota">' +
+        '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>' +
+      '</button>' +
+      '<div class="nota-scroll" tabindex="0">' +
+        '<img class="nota-foto" alt="">' +
+        '<div class="nota-content">' +
+        '<h2 class="nota-title" id="nota-titulo"></h2>' +
+        '<p class="nota-epigrafe"></p>' +
+        '<div class="nota-body"></div>' +
+        '<p class="nota-footer"><a class="btn btn-outline-dark nota-link" href="#">Abrir la nota en su página</a></p>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(el);
+
+  var m = {
+    el: el,
+    scroll: el.querySelector('.nota-scroll'),
+    photo: el.querySelector('.nota-foto'),
+    title: el.querySelector('.nota-title'),
+    epigrafe: el.querySelector('.nota-epigrafe'),
+    body: el.querySelector('.nota-body'),
+    link: el.querySelector('.nota-link'),
+    close: el.querySelector('.nota-close')
+  };
+
+  m.close.addEventListener('click', closeNota);
+  // Tocar afuera de la nota la cierra
+  el.addEventListener('click', function (e) {
+    if (e.target === el) closeNota();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (el.hidden) return;
+    if (e.key === 'Escape') closeNota();
+    // El foco queda dentro de la nota mientras está abierta
+    if (e.key === 'Tab') {
+      var items = el.querySelectorAll('button, a[href], iframe, [tabindex="0"]');
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  return m;
 }
 
 function htmlToText(html) {
@@ -1731,9 +2872,11 @@ function setupModals() {
 
 // ---------- Inicio ----------
 setupHeader();
+setupSearch();
 setupFontSize();
 setupToTop();
 setupCarousel();
+setupArticle();
 setupContactForm();
 setupCopyButtons();
 setupModals();

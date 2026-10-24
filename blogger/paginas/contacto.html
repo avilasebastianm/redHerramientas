@@ -1,4 +1,111 @@
-<div class="rh-full">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap">
+<style>
+.rh-contacto {
+  --dominant: #c77986; --dominant-dark: #b56a75; --accent: #e5a9a9;
+  --bg: #faf9f6; --text: #2c2c2c; --muted: #6b6b6b; --white: #ffffff; --border: #e0e0e0;
+  font-family: Roboto, Arial, sans-serif; line-height: 1.5; color: var(--text); background: var(--bg);
+}
+.rh-contacto * { box-sizing: border-box; }
+.rh-contacto a { color: inherit; }
+.rh-contacto h1, .rh-contacto h2 { font-family: inherit; }
+.rh-contacto .page-hero h1, .rh-contacto .page-hero p { color: var(--white); }
+.rh-contacto .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.rh-contacto .section { padding: 48px 0; }
+.rh-contacto .section-title {
+  margin: 0 0 24px;
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: var(--text);
+}
+.rh-contacto .btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 24px;
+  background: var(--dominant);
+  color: var(--white);
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.rh-contacto .btn:hover { background: var(--dominant-dark); }
+.rh-contacto .page-hero {
+  padding: 56px 0;
+  background: var(--dominant);
+  color: var(--white);
+}
+.rh-contacto .page-hero h1 { margin: 0 0 8px; font-size: 2.6rem; font-weight: 500; }
+.rh-contacto .page-hero p { margin: 0; max-width: 620px; font-size: 1.2rem; }
+.rh-contacto .contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+  align-items: start;
+}
+.rh-contacto .contact-grid { grid-template-columns: 1fr; }
+.rh-contacto .channels { display: grid; gap: 14px; }
+.rh-contacto .channel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--white);
+  text-decoration: none;
+}
+.rh-contacto .channel:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+.rh-contacto .channel-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.rh-contacto .channel-icon svg { width: 26px; height: 26px; fill: #fff; }
+.rh-contacto .channel strong { display: block; }
+.rh-contacto .channel small { color: var(--muted); font-size: 0.95rem; overflow-wrap: anywhere; }
+.rh-contacto .contact-form {
+  display: grid;
+  gap: 18px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--white);
+}
+.rh-contacto .contact-form h2 { margin: 0; font-weight: 500; }
+.rh-contacto .contact-form label { display: grid; gap: 6px; font-weight: 600; }
+.rh-contacto .contact-form input, .rh-contacto .contact-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: var(--bg);
+  font: inherit;
+  color: var(--text);
+}
+.rh-contacto .contact-form input:focus, .rh-contacto .contact-form textarea:focus {
+  border-color: var(--dominant);
+  outline: 2px solid var(--accent);
+}
+.rh-contacto .contact-form textarea { min-height: 150px; resize: vertical; }
+.rh-contacto .contact-form .honey { display: none; }
+.rh-contacto .form-msg { margin: 0; font-weight: 700; }
+.rh-contacto .form-msg:empty { display: none; }
+.rh-contacto .form-msg.ok { color: #2e7d32; }
+.rh-contacto .form-msg.error { color: #c62828; }
+@media (max-width: 800px) { .rh-contacto .contact-grid { grid-template-columns: 1fr; } }
+</style>
+
+<div class="rh-full rh-contacto">
 
     <section class="page-hero">
       <div class="container">
@@ -52,3 +159,33 @@
       </div>
     </section>
 </div>
+
+<script>
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form || !window.fetch) return;
+  var msg = document.getElementById('form-msg');
+  var button = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    button.disabled = true;
+    msg.className = 'form-msg';
+    msg.textContent = 'Enviando...';
+    fetch('https://formsubmit.co/ajax/info@redherramientas.com', {
+      method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (String(data.success) !== 'true') throw new Error(data.message);
+        form.reset();
+        msg.className = 'form-msg ok';
+        msg.textContent = '¡Gracias! Recibimos tu mensaje y te vamos a responder a la brevedad.';
+      })
+      .catch(function () {
+        msg.className = 'form-msg error';
+        msg.textContent = 'No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp.';
+      })
+      .then(function () { button.disabled = false; });
+  });
+})();
+</script>
