@@ -27,6 +27,7 @@ IMG_URLS = {
     'donar-grande.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEheQehahNzg2ayXj1M-KjRJ3S2ZS_P-3QjYaKkZYZ7yO7zLXGW74LU6RnNQFsldTXrptCkj6Wkrvbpo5HZtUtJ2fP9WqJ9EBY9oSyHkU2w2paeTlgL008yPt-28cvmBVswSvmgz0fvFgicjpxDZ24o2nhBK012YG_HIiquj1IOAuEP2vZzzacwO3H8qfkQ/s1600/donar-grande.jpg',
     'donar-chica-1.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVI7Lmp9WvHr7WPLaeQMyST1f0p0VC5lFuJzMXYJnE5847sgZGfViUrpzMWkvNTjeLyM3u5E0KU9BO8CbTNTuRbOUur6wPLwKzOJ9qqSy_4SJkbk-yCAug6CkfMItYaNzdigVpb80FkV_9aHUnmYE0LBT82-sy_Ah5IujtV189q8H8v8y-HAIFYwB-fZM/s1600/donar-chica-1.jpg',
     'donar-chica-2.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicV5j3PS-m5k1pfhXXADBQgN2syo9cmc_IH7DDNn2KtJXJqXMd0w2tFGgku04zIkwi1NP5FTjw-BGCxq4_DdajBMZTqvbpkGVDEdluzY2iNckqUTxGlaBaZLad91uVRduhyux7qXk2W-RD6QMXS5gSYRr3Y-oDoXw9YOjJvyYFIJYUJZ6y9GU-9JBJL_A/s1600/donar-chica-2.jpg',
+    'logo-footer.png': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbxEmeatlpRVtwtQEmVQltrVh7KdvhL7OI2DDGpo_L45WIZ9V8Nj_2h0sHVHIi7NHKU9O1hfG-xV5xPtVWhIFRGiJ59XqZU3anOgP7dIFYq6PCSn-KO21g2QMOu8LP2BZ0iEFkTsNoVcNTts1PcNwC7suhpmpeSecOcY7vQ6m2T-iMgBOZzVroZu9I5wI/s1600/logo-footer.png',
 }
 
 
@@ -93,7 +94,7 @@ chunks = middle.split('<div class="separator"></div>')[1:]
 chunks[-1] = chunks[-1].rsplit('</div>', 1)[0]  # cierre del .container
 blocks = [links('      <div class="separator"></div>' + c.rstrip() + '\n') for c in chunks]
 contact_cta = xhtml(links(between(index, '    <!-- Llamado a la página de contacto', '  </main>')))
-footer = xhtml(between(index, '  <footer class="footer">', '  <script'))
+footer = xhtml(links(between(index, '  <footer class="footer">', '  <script')))
 
 # Gadgets editables desde Diseño (ids altos para no pisar los gadgets del tema anterior)
 home_widgets = [
