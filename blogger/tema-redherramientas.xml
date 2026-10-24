@@ -1335,7 +1335,8 @@ html.nota-abierta { overflow: hidden; }
 
 .donate-ways {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 280px));
+  justify-content: center;
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto;
@@ -1704,23 +1705,23 @@ a.chip-label:hover { background: var(--dominant-dark); }
         <h2 class="ejes-title">Nuestros ejes</h2>
         <p class="ejes-lead">Cuatro grandes temas para encontrar rápido lo que buscás, en un solo clic.</p>
         <div class="ejes">
-          <a class="eje eje-salud" href="#pendiente-salud">
+          <a class="eje eje-salud" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwTggGgg6RwR_EEwx8UwvlFIhKgOqRW5K-JmMrqWYi3uaKwtKVp3Wm0e1XP8dub5s0-Lx11s1VcWYQTpn9tneABCHqkag91JEKpphWRa7B0VY2ca7WTIZ0I4DUS76oscEWVtHEWEuxYXoXEDW6PMGkO4NDoD-d5sZ4q0a3yjjQy1LObHXFZqhU3IcxjuM/s1600/eje-salud.jpg)" href="#pendiente-salud">
             <span class="eje-icon" aria-hidden="true">🌿</span>
             <strong>Salud y Bienestar</strong>
             <small>Actividad física y cuidado personal</small>
           </a>
-          <a class="eje eje-cultura" href="/search/label/Cultura">
+          <a class="eje eje-cultura" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirHuX3S_j-FN_O2caq88egGcpyXyFyUWrPr7dSKBgaYbBQwfOgUQkIk_FGyRFp_JMi_L1QdcfTtLMrcNN-iY29M90_ZrYAUuyTB-wIR164oGInNZXHSx3lzrjjrnWS38E_Ag_GJsPy3YuIeXm8rO9Gdnf0f8KZ9dz_O7RxA_kTeWrR0EDSfBfAi6kp1fI/s1600/eje-educacion.jpg)" href="/search/label/Cultura">
             <span class="eje-icon" aria-hidden="true">🎭</span>
             <strong>Educación y Cultura</strong>
             <small>Enredos de Película · #ClicSeguroEnRED</small>
             <span class="chip">Nuevo</span>
           </a>
-          <a class="eje eje-derechos" href="/search/label/Derecho%20a%20tener%20derechos">
+          <a class="eje eje-derechos" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcdPWEbSj9Y9JbonZZJaSRPbWVz2V17xNES6TMw70yaE7xUxGXpFP-vVf-vtq58zGWnXkBBBsIAn-A6DSaQcgKsn7NwIIA75T7ltukSdSnvDMpwDNvN7squZKjdovuRkWDBwHjZuqYSwkQvvkteHhkPjSV8kKSfvZGyzTIqGcTfOPaA6S_QXsBvFV5YOk/s1600/eje-derechos.jpg)" href="/search/label/Derecho%20a%20tener%20derechos">
             <span class="eje-icon" aria-hidden="true">⚖️</span>
             <strong>Derechos</strong>
             <small>Derecho a tener derechos, leyes y proyectos</small>
           </a>
-          <a class="eje eje-ambiente" href="/search/label/Soberan%C3%ADa%20Alimentaria">
+          <a class="eje eje-ambiente" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhubcac_kZPG96ARw1F2VjoZ1uH8c4B9W3DdVskMgV5qj9EMrigmpOO6_-lV13nkdGIConSVq5l-Nw5HuIs4Kb9mHrPSOrt6Eyy7avZirtnR6KhvBVy5kI_yGdrmDEOETdZv5jQNbG-kq-KJhwM6zPn2sN4XVRlVmXD4Qm_S5Drv6qJ8pvLCdk00PaJh2E/s1600/eje-ambiente.jpg)" href="/search/label/Soberan%C3%ADa%20Alimentaria">
             <span class="eje-icon" aria-hidden="true">🌱</span>
             <strong>Medio Ambiente</strong>
             <small>Incluye soberanía alimentaria · podcast de Marta</small>

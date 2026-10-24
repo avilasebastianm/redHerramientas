@@ -49,17 +49,17 @@
   </header>
 
   <main id="contenido">
-    <!-- Fotos de actividades (ilustraciones provisorias: reemplazar por fotos reales) -->
+    <!-- Fotos de la asociación: grande 1600 x 800, chicas 800 x 400 -->
     <section class="donate-hero">
       <div class="gallery">
-        <img class="gallery-main" src="img/taller-celular.svg" alt="Taller de uso seguro del celular">
-        <img src="img/encuentro-cultural.svg" alt="Encuentro cultural y de lectura">
-        <img src="img/huerta-comunitaria.svg" alt="Huerta comunitaria">
+        <img class="gallery-main" src="img/donar-grande.jpg" alt="Una mujer mayor sonríe frente a su computadora">
+        <img src="img/donar-chica-1.jpg" alt="Encuentro virtual de mujeres de la Red">
+        <img src="img/donar-chica-2.jpg" alt="Manos de mujeres mayores unidas">
       </div>
       <div class="container">
         <div class="donate-hero-text">
           <h1>Sostené la Red</h1>
-          <p>Talleres, encuentros y acompañamiento entre pares para que las mujeres adultas mayores vivan con autonomía, inclusión y trato digno. Tu aporte lo hace posible.</p>
+          <p>Todo lo que hacemos es gratuito, y sigue siéndolo porque esta Red la sostenemos entre todas. Tu aporte, por pequeño que sea, permite sumar más mujeres que aprenden y se animan. ¿Nos ayudás a crecer?</p>
         </div>
       </div>
     </section>
@@ -68,26 +68,16 @@
       <div class="container">
         <h2 class="section-title donate-title">Elegí cómo donar</h2>
         <div class="donate-ways">
-          <a class="way" href="#pendiente-mercadopago">
+          <button class="way" type="button" data-modal="modal-transferencia">
             <span class="way-icon" style="background:#009ee3">MP</span>
             <strong>Mercado Pago</strong>
-            <small>Tarjeta o dinero en cuenta</small>
-          </a>
+            <small>Con el alias, desde la app</small>
+          </button>
           <button class="way" type="button" data-modal="modal-transferencia">
             <span class="way-icon" style="background:var(--dominant)">⇄</span>
             <strong>Transferencia</strong>
-            <small>Ver datos bancarios</small>
+            <small>Desde cualquier banco o billetera</small>
           </button>
-          <button class="way" type="button" data-modal="modal-deposito">
-            <span class="way-icon" style="background:#2c2c2c">$</span>
-            <strong>Depósito</strong>
-            <small>Ver datos de la cuenta</small>
-          </button>
-          <a class="way" href="#pendiente-paypal">
-            <span class="way-icon" style="background:#003087">PP</span>
-            <strong>PayPal</strong>
-            <small>Desde el exterior</small>
-          </a>
         </div>
         <p class="donate-more">¿Querés colaborar de otra forma? <a href="contacto.html">Escribinos</a>.</p>
       </div>
@@ -96,29 +86,15 @@
 
   <dialog class="modal" id="modal-transferencia" aria-labelledby="modal-transferencia-title">
     <div class="modal-head">
-      <h2 id="modal-transferencia-title">Transferencia bancaria</h2>
+      <h2 id="modal-transferencia-title">Datos para tu aporte</h2>
       <button class="modal-close" type="button" aria-label="Cerrar">&times;</button>
     </div>
-    <p>Desde tu banco o billetera virtual, a esta cuenta:</p>
+    <p>Desde Mercado Pago, tu banco o cualquier billetera virtual, transferí a esta cuenta de Mercado Pago:</p>
     <dl class="bank-data">
-          <div><dt>Alias</dt><dd><span class="pending" data-value="alias">A completar</span><button class="copy-btn" type="button" data-copy="alias" aria-label="Copiar alias">Copiar</button></dd></div>
-          <div><dt>CBU / CVU</dt><dd><span class="pending" data-value="cbu">A completar</span><button class="copy-btn" type="button" data-copy="cbu" aria-label="Copiar cbu / cvu">Copiar</button></dd></div>
-          <div><dt>Titular</dt><dd><span class="pending" data-value="titular">A completar</span><button class="copy-btn" type="button" data-copy="titular" aria-label="Copiar titular">Copiar</button></dd></div>
-          <div><dt>CUIT</dt><dd><span class="pending" data-value="cuit">A completar</span><button class="copy-btn" type="button" data-copy="cuit" aria-label="Copiar cuit">Copiar</button></dd></div>
-    </dl>
-    <p class="modal-note">Cuando hagas tu aporte, avisanos por <a href="https://wa.me/5491122766776" target="_blank" rel="noopener">WhatsApp</a> así te agradecemos.</p>
-  </dialog>
-  <dialog class="modal" id="modal-deposito" aria-labelledby="modal-deposito-title">
-    <div class="modal-head">
-      <h2 id="modal-deposito-title">Depósito bancario</h2>
-      <button class="modal-close" type="button" aria-label="Cerrar">&times;</button>
-    </div>
-    <p>En cualquier sucursal, con estos datos:</p>
-    <dl class="bank-data">
-          <div><dt>Banco</dt><dd><span class="pending" data-value="banco">A completar</span><button class="copy-btn" type="button" data-copy="banco" aria-label="Copiar banco">Copiar</button></dd></div>
-          <div><dt>Cuenta</dt><dd><span class="pending" data-value="cuenta">A completar</span><button class="copy-btn" type="button" data-copy="cuenta" aria-label="Copiar cuenta">Copiar</button></dd></div>
-          <div><dt>Sucursal</dt><dd><span class="pending" data-value="sucursal">A completar</span><button class="copy-btn" type="button" data-copy="sucursal" aria-label="Copiar sucursal">Copiar</button></dd></div>
-          <div><dt>Titular</dt><dd><span class="pending" data-value="titular-deposito">A completar</span><button class="copy-btn" type="button" data-copy="titular-deposito" aria-label="Copiar titular">Copiar</button></dd></div>
+          <div><dt>Alias</dt><dd><span data-value="alias">RH.ADULTASMAYORES.mp</span><button class="copy-btn" type="button" data-copy="alias" aria-label="Copiar alias">Copiar</button></dd></div>
+          <div><dt>CVU</dt><dd><span data-value="cbu">0000003100052647725310</span><button class="copy-btn" type="button" data-copy="cbu" aria-label="Copiar CVU">Copiar</button></dd></div>
+          <div><dt>Titular</dt><dd><span data-value="titular">ASOCIACION RED DE HERRAMIENTA</span><button class="copy-btn" type="button" data-copy="titular" aria-label="Copiar titular">Copiar</button></dd></div>
+          <div><dt>CUIT</dt><dd><span data-value="cuit">30718071174</span><button class="copy-btn" type="button" data-copy="cuit" aria-label="Copiar cuit">Copiar</button></dd></div>
     </dl>
     <p class="modal-note">Cuando hagas tu aporte, avisanos por <a href="https://wa.me/5491122766776" target="_blank" rel="noopener">WhatsApp</a> así te agradecemos.</p>
   </dialog>

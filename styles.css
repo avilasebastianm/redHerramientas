@@ -1317,7 +1317,8 @@ html.nota-abierta { overflow: hidden; }
 
 .donate-ways {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 280px));
+  justify-content: center;
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto;

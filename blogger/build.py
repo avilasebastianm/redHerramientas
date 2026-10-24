@@ -16,8 +16,18 @@ OUT = Path(__file__).resolve().parent
 # Direcciones de las páginas estáticas en Blogger
 CONTACT_URL = '/p/contactanos.html'   # la página que ya existe
 DONATE_URL = '/p/donar.html'          # página nueva "Donar"
-# Ilustraciones provisorias de la página de donar (reemplazar por fotos subidas a Blogger)
+# Fotos de la asociación (ejes y donar): en el repo están en img/; en Blogger se usan subidas a Blogger.
+# Las que no figuran acá se buscan en IMG_BASE.
 IMG_BASE = 'https://avilasebastianm.github.io/redHerramientaslucas/img/'
+IMG_URLS = {
+    'eje-salud.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwTggGgg6RwR_EEwx8UwvlFIhKgOqRW5K-JmMrqWYi3uaKwtKVp3Wm0e1XP8dub5s0-Lx11s1VcWYQTpn9tneABCHqkag91JEKpphWRa7B0VY2ca7WTIZ0I4DUS76oscEWVtHEWEuxYXoXEDW6PMGkO4NDoD-d5sZ4q0a3yjjQy1LObHXFZqhU3IcxjuM/s1600/eje-salud.jpg',
+    'eje-educacion.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirHuX3S_j-FN_O2caq88egGcpyXyFyUWrPr7dSKBgaYbBQwfOgUQkIk_FGyRFp_JMi_L1QdcfTtLMrcNN-iY29M90_ZrYAUuyTB-wIR164oGInNZXHSx3lzrjjrnWS38E_Ag_GJsPy3YuIeXm8rO9Gdnf0f8KZ9dz_O7RxA_kTeWrR0EDSfBfAi6kp1fI/s1600/eje-educacion.jpg',
+    'eje-derechos.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcdPWEbSj9Y9JbonZZJaSRPbWVz2V17xNES6TMw70yaE7xUxGXpFP-vVf-vtq58zGWnXkBBBsIAn-A6DSaQcgKsn7NwIIA75T7ltukSdSnvDMpwDNvN7squZKjdovuRkWDBwHjZuqYSwkQvvkteHhkPjSV8kKSfvZGyzTIqGcTfOPaA6S_QXsBvFV5YOk/s1600/eje-derechos.jpg',
+    'eje-ambiente.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhubcac_kZPG96ARw1F2VjoZ1uH8c4B9W3DdVskMgV5qj9EMrigmpOO6_-lV13nkdGIConSVq5l-Nw5HuIs4Kb9mHrPSOrt6Eyy7avZirtnR6KhvBVy5kI_yGdrmDEOETdZv5jQNbG-kq-KJhwM6zPn2sN4XVRlVmXD4Qm_S5Drv6qJ8pvLCdk00PaJh2E/s1600/eje-ambiente.jpg',
+    'donar-grande.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEheQehahNzg2ayXj1M-KjRJ3S2ZS_P-3QjYaKkZYZ7yO7zLXGW74LU6RnNQFsldTXrptCkj6Wkrvbpo5HZtUtJ2fP9WqJ9EBY9oSyHkU2w2paeTlgL008yPt-28cvmBVswSvmgz0fvFgicjpxDZ24o2nhBK012YG_HIiquj1IOAuEP2vZzzacwO3H8qfkQ/s1600/donar-grande.jpg',
+    'donar-chica-1.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVI7Lmp9WvHr7WPLaeQMyST1f0p0VC5lFuJzMXYJnE5847sgZGfViUrpzMWkvNTjeLyM3u5E0KU9BO8CbTNTuRbOUur6wPLwKzOJ9qqSy_4SJkbk-yCAug6CkfMItYaNzdigVpb80FkV_9aHUnmYE0LBT82-sy_Ah5IujtV189q8H8v8y-HAIFYwB-fZM/s1600/donar-chica-1.jpg',
+    'donar-chica-2.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicV5j3PS-m5k1pfhXXADBQgN2syo9cmc_IH7DDNn2KtJXJqXMd0w2tFGgku04zIkwi1NP5FTjw-BGCxq4_DdajBMZTqvbpkGVDEdluzY2iNckqUTxGlaBaZLad91uVRduhyux7qXk2W-RD6QMXS5gSYRr3Y-oDoXw9YOjJvyYFIJYUJZ6y9GU-9JBJL_A/s1600/donar-chica-2.jpg',
+}
 
 
 def read(name):
@@ -37,6 +47,9 @@ def links(s):
         s = s.replace('href="#%s"' % anchor, 'href="/#%s"' % anchor)
     s = s.replace('href="contacto.html"', 'href="%s"' % CONTACT_URL)
     s = s.replace('href="donar.html"', 'href="%s"' % DONATE_URL)
+    for name, url in IMG_URLS.items():
+        assert url, 'falta la URL de ' + name
+        s = s.replace('img/' + name, url)
     s = s.replace('src="img/', 'src="' + IMG_BASE)
     # Links al blog sin dominio, así funcionan igual en el blog de pruebas y en producción
     s = s.replace('href="https://www.redherramientas.com/', 'href="/')
