@@ -1705,7 +1705,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
         <h2 class="ejes-title">Nuestros ejes</h2>
         <p class="ejes-lead">Cuatro grandes temas para encontrar rápido lo que buscás, en un solo clic.</p>
         <div class="ejes">
-          <a class="eje eje-salud" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwTggGgg6RwR_EEwx8UwvlFIhKgOqRW5K-JmMrqWYi3uaKwtKVp3Wm0e1XP8dub5s0-Lx11s1VcWYQTpn9tneABCHqkag91JEKpphWRa7B0VY2ca7WTIZ0I4DUS76oscEWVtHEWEuxYXoXEDW6PMGkO4NDoD-d5sZ4q0a3yjjQy1LObHXFZqhU3IcxjuM/s1600/eje-salud.jpg)" href="#pendiente-salud">
+          <a class="eje eje-salud" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwTggGgg6RwR_EEwx8UwvlFIhKgOqRW5K-JmMrqWYi3uaKwtKVp3Wm0e1XP8dub5s0-Lx11s1VcWYQTpn9tneABCHqkag91JEKpphWRa7B0VY2ca7WTIZ0I4DUS76oscEWVtHEWEuxYXoXEDW6PMGkO4NDoD-d5sZ4q0a3yjjQy1LObHXFZqhU3IcxjuM/s1600/eje-salud.jpg)" href="/search/label/Salud">
             <span class="eje-icon" aria-hidden="true">🌿</span>
             <strong>Salud y Bienestar</strong>
             <small>Actividad física y cuidado personal</small>
