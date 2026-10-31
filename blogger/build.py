@@ -18,7 +18,7 @@ CONTACT_URL = '/p/contactanos.html'   # la página que ya existe
 DONATE_URL = '/p/donar.html'          # página nueva "Donar"
 # Fotos de la asociación (ejes y donar): en el repo están en img/; en Blogger se usan subidas a Blogger.
 # Las que no figuran acá se buscan en IMG_BASE.
-IMG_BASE = 'https://avilasebastianm.github.io/redHerramientaslucas/img/'
+IMG_BASE = 'https://avilasebastianm.github.io/redHerramientas/img/'
 IMG_URLS = {
     'eje-salud.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgepdFDsnI33_i8xqUtXURDEo3wfPdCoROejuVIq3HcCSBxE-DgtCm9CPrxyZrwOYz14Ak7ebHifQWVb3Yk3YxQD9BMTGq9mfo61rpjVdK_3mmuz242Umgkxx1yB16UFwGJt65ZSb3atnIWacG0HD2OnMdCof-2YaDeQPNFei-OpmLKChDipWhCWAef3LsG/s1600/eje-salud.jpg',
     'eje-educacion.jpg': 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5Low7BJMOSvqLN3bFaIEOIdKM_cxrPLv_fybUhGjBhJ9KghK0JkcGvMk_g8NWGtTgI0RBlEUpxjz-GYZya7flGPF7mefBroZJvg_2auFzMkT2XReeEEva1oyaNlJ2OCkHjca-3PkdAapw3dhGSt7pjHgbXwM1ZYoDUP3BqHgcTSLb23YZg1r4c4Wi60_E/s1600/eje-educacion.jpg',
