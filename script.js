@@ -317,7 +317,7 @@ function searchPosts(query, callback) {
         title: entry.title.$t || 'Sin título',
         url: link ? link.href : BLOG_URL,
         image: image || 'https://i.imgur.com/CFM0Pcr.png',
-        label: entry.category && entry.category.length ? entry.category[0].term : '',
+        label: topicLabel(entry.category),
         date: published && !isNaN(published) ? published.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' }) : ''
       };
     }));
@@ -623,6 +623,14 @@ function setupCarousel() {
       render(latest.length ? latest : FALLBACK_SLIDES.map(fallbackItem));
     });
   });
+}
+
+// Primera etiqueta que es un tema (Carrusel y Novedades solo eligen dónde aparece la entrada)
+function topicLabel(categories) {
+  var topic = (categories || []).filter(function (c) {
+    return c.term !== CAROUSEL_LABEL && c.term !== NEWS_LABEL;
+  })[0];
+  return topic ? topic.term : '';
 }
 
 // ---------- Novedades ----------

@@ -137,7 +137,7 @@ blog_widget = """<b:section class='main' id='main' maxwidgets='1' showaddelement
         <article class='art'>
           <nav aria-label='Ubicación' class='art-crumbs'>
             <a expr:href='data:blog.homepageUrl'>Inicio</a>
-            <b:if cond='data:post.labels'><span aria-hidden='true'>/</span><a class='art-section' expr:href='data:post.labels.first.url'><data:post.labels.first.name/></a></b:if>
+            <b:with value='data:post.labels first (l =&gt; l.name != &quot;Carrusel&quot; and l.name != &quot;Novedades&quot;)' var='tema'><b:if cond='data:tema'><span aria-hidden='true'>/</span><a class='art-section' expr:href='data:tema.url'><data:tema.name/></a></b:if></b:with>
           </nav>
           <h1 class='art-title'><b:eval expr='data:post.title ? data:post.title : &quot;Sin título&quot;'/></h1>
           <p class='art-bajada' hidden='hidden'/>
@@ -154,8 +154,8 @@ blog_widget = """<b:section class='main' id='main' maxwidgets='1' showaddelement
           </div>
           <figure class='art-hero' hidden='hidden'/>
           <div class='post-body art-body'><data:post.body/></div>
-          <b:if cond='data:post.labels'>
-            <div class='art-tags'>Temas: <b:loop values='data:post.labels' var='label'><a expr:href='data:label.url'><data:label.name/></a></b:loop></div>
+          <b:if cond='data:post.labels any (l =&gt; l.name != &quot;Carrusel&quot; and l.name != &quot;Novedades&quot;)'>
+            <div class='art-tags'>Temas: <b:loop values='data:post.labels where (l =&gt; l.name != &quot;Carrusel&quot; and l.name != &quot;Novedades&quot;)' var='label'><a expr:href='data:label.url'><data:label.name/></a></b:loop></div>
           </b:if>
           <div class='art-share-box'>
             <h2>&#191;Te sirvió esta nota? Compartila</h2>
@@ -165,12 +165,12 @@ blog_widget = """<b:section class='main' id='main' maxwidgets='1' showaddelement
               <button class='share-big copy' data-share='copy' type='button'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z'/></svg><span class='label'>Copiar enlace</span></button>
             </div>
           </div>
-          <b:if cond='data:post.labels'>
-            <section class='art-related' expr:data-label='data:post.labels.first.name' hidden='hidden'>
+          <b:with value='data:post.labels first (l =&gt; l.name != &quot;Carrusel&quot; and l.name != &quot;Novedades&quot;)' var='tema'><b:if cond='data:tema'>
+            <section class='art-related' expr:data-label='data:tema.name' hidden='hidden'>
               <h2 class='block-title'>Seguí leyendo</h2>
               <div class='rel-grid'/>
             </section>
-          </b:if>
+          </b:if></b:with>
         </article>
       </b:if>
     </b:loop>
@@ -195,7 +195,7 @@ blog_widget = """<b:section class='main' id='main' maxwidgets='1' showaddelement
                 </b:if>
               </div>
               <div class='post-card-body'>
-                <b:if cond='data:post.labels'><span class='chip-label'><data:post.labels.first.name/></span></b:if>
+                <b:with value='data:post.labels first (l =&gt; l.name != &quot;Carrusel&quot; and l.name != &quot;Novedades&quot;)' var='tema'><b:if cond='data:tema'><span class='chip-label'><data:tema.name/></span></b:if></b:with>
                 <h2><b:eval expr='data:post.title ? data:post.title : &quot;Sin título&quot;'/></h2>
                 <p class='post-card-date'><data:post.date/></p>
                 <p class='post-card-snippet'><data:post.snippets.short/></p>
