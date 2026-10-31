@@ -1621,7 +1621,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
 
 <header class="header">
     <div class="header-inner">
-      <a class="logo" href="/"><img src="https://i.imgur.com/CFM0Pcr.png" alt="Red de Herramientas — Asociación Civil IGJ 1981600" width="264" height="60"/></a>
+      <a class="logo" href="/"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEG2E3H7aF-xvhpflHXcxgPxlbUGH3i8kP4CI1egOK_waREN5tY67vnWT1vIgKcEOhnXPxfa0auVp_W9zI4XD5oLK1xtyJyf4-Q8C6jpPR_86h2BpawEDBwzKIKfll87hGYLQgE3n4TQ_GTSnj0rLGvuqDs6cg8EVrYvlyov-hTKmSkwt0goKB1NzKpv2e/s1600/logo-header.png" alt="Red de Herramientas — Asociación Civil IGJ 1981600" width="264" height="60"/></a>
 
       <nav class="nav" id="nav" aria-label="Principal">
         <ul>
@@ -1648,7 +1648,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
           </ul>
         </div>
         <a class="whatsapp-btn" href="https://wa.me/5491122766776" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         </a>
         <button class="icon-btn menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menú">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
@@ -1708,23 +1708,23 @@ a.chip-label:hover { background: var(--dominant-dark); }
         <h2 class="ejes-title">Nuestros ejes</h2>
         <p class="ejes-lead">Cuatro grandes temas para encontrar rápido lo que buscás, en un solo clic.</p>
         <div class="ejes">
-          <a class="eje eje-salud" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwTggGgg6RwR_EEwx8UwvlFIhKgOqRW5K-JmMrqWYi3uaKwtKVp3Wm0e1XP8dub5s0-Lx11s1VcWYQTpn9tneABCHqkag91JEKpphWRa7B0VY2ca7WTIZ0I4DUS76oscEWVtHEWEuxYXoXEDW6PMGkO4NDoD-d5sZ4q0a3yjjQy1LObHXFZqhU3IcxjuM/s1600/eje-salud.jpg)" href="/search/label/Salud">
+          <a class="eje eje-salud" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgepdFDsnI33_i8xqUtXURDEo3wfPdCoROejuVIq3HcCSBxE-DgtCm9CPrxyZrwOYz14Ak7ebHifQWVb3Yk3YxQD9BMTGq9mfo61rpjVdK_3mmuz242Umgkxx1yB16UFwGJt65ZSb3atnIWacG0HD2OnMdCof-2YaDeQPNFei-OpmLKChDipWhCWAef3LsG/s1600/eje-salud.jpg)" href="/search/label/Salud">
             <span class="eje-icon" aria-hidden="true">🌿</span>
             <strong>Salud y Bienestar</strong>
             <small>Actividad física y cuidado personal</small>
           </a>
-          <a class="eje eje-cultura" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirHuX3S_j-FN_O2caq88egGcpyXyFyUWrPr7dSKBgaYbBQwfOgUQkIk_FGyRFp_JMi_L1QdcfTtLMrcNN-iY29M90_ZrYAUuyTB-wIR164oGInNZXHSx3lzrjjrnWS38E_Ag_GJsPy3YuIeXm8rO9Gdnf0f8KZ9dz_O7RxA_kTeWrR0EDSfBfAi6kp1fI/s1600/eje-educacion.jpg)" href="/search/label/Cultura">
+          <a class="eje eje-cultura" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5Low7BJMOSvqLN3bFaIEOIdKM_cxrPLv_fybUhGjBhJ9KghK0JkcGvMk_g8NWGtTgI0RBlEUpxjz-GYZya7flGPF7mefBroZJvg_2auFzMkT2XReeEEva1oyaNlJ2OCkHjca-3PkdAapw3dhGSt7pjHgbXwM1ZYoDUP3BqHgcTSLb23YZg1r4c4Wi60_E/s1600/eje-educacion.jpg)" href="/search/label/Cultura">
             <span class="eje-icon" aria-hidden="true">🎭</span>
             <strong>Educación y Cultura</strong>
             <small>Enredos de Película · #ClicSeguroEnRED</small>
             <span class="chip">Nuevo</span>
           </a>
-          <a class="eje eje-derechos" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcdPWEbSj9Y9JbonZZJaSRPbWVz2V17xNES6TMw70yaE7xUxGXpFP-vVf-vtq58zGWnXkBBBsIAn-A6DSaQcgKsn7NwIIA75T7ltukSdSnvDMpwDNvN7squZKjdovuRkWDBwHjZuqYSwkQvvkteHhkPjSV8kKSfvZGyzTIqGcTfOPaA6S_QXsBvFV5YOk/s1600/eje-derechos.jpg)" href="/search/label/Derecho%20a%20tener%20derechos">
+          <a class="eje eje-derechos" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHcx4PSIHGOwxS5dFRWcwKZfrSC0bBWHXawJoRw9Fwzh9HcB7bnrI3FnOIoJhAV3xH84Vw2sonirr6PdjVHSv_CuWK2NA94zH-vvq0kd-UJk-sWYXkNpeOVCicdlFCt0nAg3_MHjHNyA4JeFHiaGa8tNfm5ea2Vy0Qoo2CB6kahbydTa528yJEkhmhDyS3/s1600/eje-derechos.jpg)" href="/search/label/Derecho%20a%20tener%20derechos">
             <span class="eje-icon" aria-hidden="true">⚖️</span>
             <strong>Derechos</strong>
             <small>Derecho a tener derechos, leyes y proyectos</small>
           </a>
-          <a class="eje eje-ambiente" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhubcac_kZPG96ARw1F2VjoZ1uH8c4B9W3DdVskMgV5qj9EMrigmpOO6_-lV13nkdGIConSVq5l-Nw5HuIs4Kb9mHrPSOrt6Eyy7avZirtnR6KhvBVy5kI_yGdrmDEOETdZv5jQNbG-kq-KJhwM6zPn2sN4XVRlVmXD4Qm_S5Drv6qJ8pvLCdk00PaJh2E/s1600/eje-ambiente.jpg)" href="/search/label/Soberan%C3%ADa%20Alimentaria">
+          <a class="eje eje-ambiente" style="--img: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEih_QoOzoSeyd-E46cWtOK3CPHR-w-m1Dp2MHkco26ANu_6-DaW_BB5fRHa2sD8c_gnvq1v3_vLjN2SuYa6qrXS2kBcLeDm8EgoUNBv2h0eyKdNtpQchqs-yHjIBWN1x-uxFAvcQo0JJCPZCyRVY_PTLOe73Rs3er3vPy-c8Yr-ldfUYpImMSmQsODFJXbE/s1600/eje-ambiente.jpg)" href="/search/label/Soberan%C3%ADa%20Alimentaria">
             <span class="eje-icon" aria-hidden="true">🌱</span>
             <strong>Medio Ambiente</strong>
             <small>Incluye soberanía alimentaria · podcast de Marta</small>
@@ -1768,7 +1768,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
           <p>Con tu aporte podemos seguir construyendo espacios de inclusión, encuentro y formación para mujeres adultas mayores.</p>
         </div>
         <a class="btn btn-mustard" href="/p/donar.html">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 2c-1.3 0-2.4.6-3 1.5C12.4 2.6 11.3 2 10 2 8 2 6.5 3.6 6.5 5.6 6.5 8.8 13 13 13 13s6.5-4.2 6.5-7.4C19.5 3.6 18 2 16 2zM1 22h4V11H1v11zm19.5-7.5H14l-2.1-.7.3-.9 1.9.6h2.8c.6 0 1.1-.5 1.1-1.1 0-.5-.3-.9-.7-1L10.1 9H7v9.9l7 2.1 8-3v-1c0-1.1-.7-2.5-1.5-2.5z"/></svg>
+          <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><path d="M32 34s-13-8-13-17c0-4.4 3.3-7.5 7.2-7.5 2.6 0 4.6 1.4 5.8 3.4 1.2-2 3.2-3.4 5.8-3.4 3.9 0 7.2 3.1 7.2 7.5 0 9-13 17-13 17z"/><path d="M6 40c3-1.6 6.5-1.7 9.6-.3l9.4 4.2c1.8.8 2.6 2.9 1.8 4.7-.7 1.6-2.5 2.4-4.2 2l-6.4-1.6 6.2 2.4c2.1.8 4.4.8 6.5 0L52 43.6c1.9-.7 4 .2 4.7 2.1.6 1.6 0 3.4-1.5 4.3L39.6 58.6c-3.6 2-7.9 2.4-11.8 1.1L6 52.6z"/></svg>
           Donar
         </a>
       </section>
@@ -1805,7 +1805,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
               <div><strong>Red de Herramientas</strong><small><b:if cond='data:view.isPost'><data:post.date/> &#183; </b:if><span class='art-lectura'/></small></div>
             </div>
             <div class='art-share'>
-              <a aria-label='Compartir por WhatsApp' class='share-icon wa' data-share='wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z'/></svg></a>
+              <a aria-label='Compartir por WhatsApp' class='share-icon wa' data-share='wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'/></svg></a>
               <a aria-label='Compartir en Facebook' class='share-icon fb' data-share='fb' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M13.4 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.8v3h2.5V21z'/></svg></a>
               <button aria-label='Copiar enlace' class='share-icon copy' data-share='copy' type='button'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z'/></svg></button>
             </div>
@@ -1818,7 +1818,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
           <div class='art-share-box'>
             <h2>&#191;Te sirvió esta nota? Compartila</h2>
             <div class='btns'>
-              <a class='share-big wa' data-share='wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z'/></svg>WhatsApp</a>
+              <a class='share-big wa' data-share='wa' expr:href='&quot;https://wa.me/?text=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'/></svg>WhatsApp</a>
               <a class='share-big fb' data-share='fb' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url.canonical' rel='noopener' target='_blank'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M13.4 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.8v3h2.5V21z'/></svg>Facebook</a>
               <button class='share-big copy' data-share='copy' type='button'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8v2zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z'/></svg><span class='label'>Copiar enlace</span></button>
             </div>
@@ -1849,7 +1849,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
                 <b:if cond='data:post.featuredImage'>
                   <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage, 640, &quot;4:3&quot;)' loading='lazy'/>
                 <b:else/>
-                  <img alt='' class='no-img' src='https://i.imgur.com/CFM0Pcr.png'/>
+                  <img alt='' class='no-img' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEG2E3H7aF-xvhpflHXcxgPxlbUGH3i8kP4CI1egOK_waREN5tY67vnWT1vIgKcEOhnXPxfa0auVp_W9zI4XD5oLK1xtyJyf4-Q8C6jpPR_86h2BpawEDBwzKIKfll87hGYLQgE3n4TQ_GTSnj0rLGvuqDs6cg8EVrYvlyov-hTKmSkwt0goKB1NzKpv2e/s1600/logo-header.png'/>
                 </b:if>
               </div>
               <div class='post-card-body'>
@@ -1892,7 +1892,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
             <b:if cond='data:post.featuredImage'>
               <img alt='' expr:src='resizeImage(data:post.featuredImage, 144, &quot;1:1&quot;)' loading='lazy'/>
             <b:else/>
-              <img alt='' src='https://i.imgur.com/CFM0Pcr.png' style='object-fit:contain'/>
+              <img alt='' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEG2E3H7aF-xvhpflHXcxgPxlbUGH3i8kP4CI1egOK_waREN5tY67vnWT1vIgKcEOhnXPxfa0auVp_W9zI4XD5oLK1xtyJyf4-Q8C6jpPR_86h2BpawEDBwzKIKfll87hGYLQgE3n4TQ_GTSnj0rLGvuqDs6cg8EVrYvlyov-hTKmSkwt0goKB1NzKpv2e/s1600/logo-header.png' style='object-fit:contain'/>
             </b:if>
           </a></li>
         </b:loop>
@@ -1906,7 +1906,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
     <b:widget-setting name='content'><![CDATA[<div class="aside-card aside-cta">
   <h2>¿Querés sumarte?</h2>
   <p>Talleres, encuentros y actividades para mujeres mayores. Escribinos y te contamos.</p>
-  <a class="share-big" href="https://wa.me/5491122766776" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z"/></svg>Escribinos</a>
+  <a class="share-big" href="https://wa.me/5491122766776" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Escribinos</a>
 </div>]]></b:widget-setting>
   </b:widget-settings>
   <b:includable id='main'><data:content/></b:includable>
@@ -1931,7 +1931,7 @@ a.chip-label:hover { background: var(--dominant-dark); }
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-about">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbxEmeatlpRVtwtQEmVQltrVh7KdvhL7OI2DDGpo_L45WIZ9V8Nj_2h0sHVHIi7NHKU9O1hfG-xV5xPtVWhIFRGiJ59XqZU3anOgP7dIFYq6PCSn-KO21g2QMOu8LP2BZ0iEFkTsNoVcNTts1PcNwC7suhpmpeSecOcY7vQ6m2T-iMgBOZzVroZu9I5wI/s1600/logo-footer.png" alt="Red de Herramientas" width="221" height="50"/>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi1TZxdMT9YyUobCUsrSHSgpW8h6s1omzuROFh6avuOlmNQQ9eHlFnKTYRbexceLMMZ5JTei6O0w7qrdeB2vaILv5asvw4E73NXggPYD8sCXkHypNVN7TToyDAg8UMRevUBLq3VebPydnJtyzD9bKEr5jJDp5cN1pAb9N_bw4O2QjVk_sahxskfvS-eYIzL/s1600/logo-footer.png" alt="Red de Herramientas" width="221" height="50"/>
         <div>
           <strong>Asociación Civil Sin Fines de Lucro - IGJ N° 1981600</strong>
           <p>Propiciamos espacios que garanticen inclusión social, cultural y de los derechos de las mujeres adultas mayores.</p>
@@ -2276,7 +2276,7 @@ function searchPosts(query, callback) {
       return {
         title: entry.title.$t || 'Sin título',
         url: link ? link.href : BLOG_URL,
-        image: image || 'https://i.imgur.com/CFM0Pcr.png',
+        image: image || 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEG2E3H7aF-xvhpflHXcxgPxlbUGH3i8kP4CI1egOK_waREN5tY67vnWT1vIgKcEOhnXPxfa0auVp_W9zI4XD5oLK1xtyJyf4-Q8C6jpPR_86h2BpawEDBwzKIKfll87hGYLQgE3n4TQ_GTSnj0rLGvuqDs6cg8EVrYvlyov-hTKmSkwt0goKB1NzKpv2e/s1600/logo-header.png',
         label: topicLabel(entry.category),
         date: published && !isNaN(published) ? published.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' }) : ''
       };
@@ -2289,7 +2289,7 @@ function searchPosts(query, callback) {
 }
 
 // ---------- Nota (posteo): foto principal, bajada, tiempo de lectura, compartir y "Seguí leyendo" ----------
-var ICON_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.2-3.1.8.83-3-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.25.27-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.9 4.36 2.4.95 2.9.76 3.4.72.52-.05 1.7-.7 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.2-.55-.34-.3-.15-1.7-.84-1.96-.94-.27-.1-.46-.15-.65.14-.2.3-.75.94-.9 1.13-.17.2-.33.22-.62.07-.3-.14-1.2-.44-2.3-1.4-.85-.76-1.42-1.7-1.6-1.98-.16-.3 0-.45.13-.6.14-.13.3-.34.44-.5.15-.17.2-.3.3-.5.1-.2.05-.36-.02-.5-.07-.15-.65-1.6-.9-2.17-.23-.55-.47-.48-.65-.49h-.55z"/></svg>';
+var ICON_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
 
 function setupArticle() {
   // Contacto y Donar van a todo el ancho (para navegadores sin :has)
@@ -2673,7 +2673,7 @@ function parseFeed(data) {
       epigrafe: parts.epigrafe,
       body: parts.body,
       photo: image,
-      image: image || 'https://i.imgur.com/CFM0Pcr.png',
+      image: image || 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEG2E3H7aF-xvhpflHXcxgPxlbUGH3i8kP4CI1egOK_waREN5tY67vnWT1vIgKcEOhnXPxfa0auVp_W9zI4XD5oLK1xtyJyf4-Q8C6jpPR_86h2BpawEDBwzKIKfll87hGYLQgE3n4TQ_GTSnj0rLGvuqDs6cg8EVrYvlyov-hTKmSkwt0goKB1NzKpv2e/s1600/logo-header.png',
       url: link ? link.href : BLOG_URL
     };
   });
