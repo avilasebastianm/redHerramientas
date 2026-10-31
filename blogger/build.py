@@ -128,7 +128,7 @@ home_html += '\n'.join(html_widget(w, t, c) for w, t, c in home_container_widget
 home_html += "\n</b:section>\n</div>\n"
 
 # ---------- Posteos, etiquetas y búsquedas ----------
-blog_widget = """<b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+blog_widget = f"""<b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
 <b:widget id='Blog1' locked='true' title='Entradas del blog' type='Blog' version='2' visible='true'>
 <b:includable id='main' var='this'>
   <b:if cond='data:view.isSingleItem'>
@@ -185,9 +185,23 @@ blog_widget = """<b:section class='main' id='main' maxwidgets='1' showaddelement
           <b:if cond='data:view.search.label'><data:view.search.label/>
           <b:elseif cond='data:view.search.query'/>Resultados para &#8220;<data:view.search.query/>&#8221;
           <b:elseif cond='data:view.isArchive'/><data:view.archive.rangeMessage/>
+          <b:elseif cond='data:view.isError'/>No encontramos esta página
           <b:else/>Publicaciones</b:if>
         </h1>
-        <b:if cond='data:posts.empty'><p class='list-empty'>No encontramos publicaciones.</p></b:if>
+        <b:if cond='data:view.isError or data:posts.empty'>
+          <div class='list-empty'>
+            <p><b:if cond='data:view.isError'>Puede que la dirección esté mal escrita o que la página ya no exista.
+              <b:elseif cond='data:view.search.query'/>No encontramos publicaciones con esa búsqueda. Probá con otra palabra o mirá nuestros ejes.
+              <b:else/>No encontramos publicaciones.</b:if></p>
+            <p class='list-empty-ejes'>
+              <a class='chip-label' href='/search/label/Salud'>Salud y Bienestar</a>
+              <a class='chip-label' href='/search/label/Cultura'>Educación y Cultura</a>
+              <a class='chip-label' href='/search/label/Derecho%20a%20tener%20derechos'>Derechos</a>
+              <a class='chip-label' href='/search/label/Soberan%C3%ADa%20Alimentaria'>Medio Ambiente</a>
+            </p>
+            <p class='list-empty-links'><a class='btn' href='/'>Ir al inicio</a> <a class='btn' href='{CONTACT_URL}'>Escribinos</a></p>
+          </div>
+        </b:if>
         <div class='post-grid'>
           <b:loop values='data:posts' var='post'>
             <a class='post-card' expr:href='data:post.url'>

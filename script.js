@@ -479,6 +479,13 @@ function linkifyUrls(root) {
   });
 }
 
+// ---------- Año del pie de página ----------
+function setupFooterYear() {
+  document.querySelectorAll('.footer-year').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
+}
+
 // ---------- Volver arriba ----------
 function setupToTop() {
   var btn = document.querySelector('.to-top');
@@ -848,6 +855,7 @@ setupHeader();
 setupSearch();
 setupFontSize();
 setupToTop();
+setupFooterYear();
 setupCarousel();
 setupNews();
 setupArticle();

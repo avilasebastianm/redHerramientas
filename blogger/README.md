@@ -19,11 +19,15 @@ Los estilos que solo se usan en Blogger (posteos, listados y ajustes) están en 
 3. **Página Contacto:** Páginas → "Contactanos" → vista HTML (ícono `<>`) → reemplazar todo por el contenido de `paginas/contacto.html`.
 4. **Página Donar:** Páginas → Nueva página → título "Donar" (tiene que quedar en `/p/donar.html`) → vista HTML → pegar `paginas/donar.html`.
 5. **Carrusel:** a los posteos que tienen que aparecer en el carrusel se les agrega la etiqueta `Carrusel`. Si ninguno la tiene, se muestran los últimos.
+6. **Novedades:** muestra las últimas 3 entradas con la etiqueta `Novedades`. Si no hay ninguna, la sección no aparece.
+
+Las fotos y logos del diseño están subidos en la entrada borrador "Imágenes del sitio (no publicar ni borrar)" de redherramientas.com; sus direcciones están en `IMG_URLS` y `LOGO_URL` de `build.py`.
 
 ## Cómo se ve cada parte
 - **Home:** el carrusel, Quiénes somos, los ejes, Novedades, Donar y la franja de contacto.
-- **Posteos:** una tarjeta blanca con las etiquetas, el título, la fecha, el contenido y botones para compartir.
+- **Posteos:** diseño editorial con migas, título, fecha y tiempo de lectura, foto principal, bajada, botones para compartir, "Seguí leyendo" y la columna "Lo más leído" / "¿Querés sumarte?".
 - **Etiquetas, búsquedas y archivo** (por ejemplo, los links de los ejes): una grilla de tarjetas con imagen, título y resumen, más "Más antiguas / Más nuevas".
+- **Página 404 y búsquedas sin resultados:** un mensaje con links a los ejes, al inicio y a Contacto.
 - **Páginas** como Quiénes somos: el mismo formato que los posteos. Las que empiezan con `<div class="rh-full">`, como Contacto y Donar, se muestran a página completa.
 
 ## Editar la home sin tocar código
@@ -31,7 +35,22 @@ En Blogger → **Diseño**, cada sección de la home es un gadget HTML: Quiénes
 
 Ojo: si después se vuelve a subir el tema, puede que Blogger conserve el contenido editado o que lo reemplace por el de `index.html`. Conviene pasar los cambios también a `index.html`.
 
+## Clases para usar al escribir una página
+Las variables de color y tipografía están todas en el `:root` de `styles.css`. Al armar el HTML de una página o un gadget, usar estas clases en vez de estilos sueltos:
+
+| Para | Clase |
+|---|---|
+| Página a todo el ancho, sin columna lateral | `<div class="rh-full">` envolviendo todo |
+| Contenido centrado con márgenes | `container` |
+| Título de sección | `section-title` |
+| Barra rosa entre secciones | `separator` |
+| Botón principal (rosa) | `btn` |
+| Botón sobre fondo de color | `btn btn-outline` |
+| Botón destacado (mostaza, como Donar) | `btn btn-mustard` |
+| Botón claro con borde rosa | `btn btn-light` |
+| Etiqueta / tema (rosa, en mayúsculas) | `chip-label` |
+| Ventana con datos (como la de Donar) | `<dialog class="modal">` + un botón con `data-modal="id-de-la-ventana"` |
+| Botón para copiar un dato | `copy-btn` con `data-copy="nombre"` y el dato en `<span data-value="nombre">` |
+
 ## Pendiente
-- Probado en el blog de pruebas (redherramientasdev.blogspot.com).
 - Comentarios en los posteos: el tema no los muestra.
-- Las imágenes de `donar.html` son las ilustraciones provisorias que están en GitHub Pages.
