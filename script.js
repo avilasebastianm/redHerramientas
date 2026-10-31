@@ -500,11 +500,10 @@ function setupCarousel() {
   var current = 0;
   var total = 0;
   var timer = null;
-  var paused = false;
 
   function play() {
     stop();
-    if (paused || total < 2) return;
+    if (total < 2) return;
     timer = setInterval(function () { goTo(current + 1); }, CAROUSEL_DELAY);
   }
 
@@ -519,18 +518,7 @@ function setupCarousel() {
       dotsEl.children[i].classList.toggle('active', i === current);
       slidesEl.children[i].setAttribute('aria-hidden', String(i !== current));
     }
-    paused = false;
     play();
-  }
-
-  // Abre la nota ampliada y pausa el carrusel hasta que se cierre
-  function open(item) {
-    paused = true;
-    stop();
-    openNota(item, function () {
-      paused = false;
-      play();
-    });
   }
 
   function makeSlide(item) {
@@ -541,10 +529,6 @@ function setupCarousel() {
     media.className = 'slide-media';
     media.href = item.url;
     media.setAttribute('aria-label', 'Ver la nota: ' + item.title);
-    media.addEventListener('click', function (e) {
-      e.preventDefault();
-      open(item);
-    });
     var blur = document.createElement('div');
     blur.className = 'blur';
     blur.style.backgroundImage = 'url("' + item.image + '")';
@@ -561,20 +545,12 @@ function setupCarousel() {
     title.textContent = item.title;
     box.appendChild(title);
 
-    if (item.epigrafe) {
-      var desc = document.createElement('p');
-      desc.className = 'slide-desc';
-      desc.textContent = item.epigrafe;
-      box.appendChild(desc);
-    }
-
     var actions = document.createElement('div');
     actions.className = 'slide-actions';
-    var more = document.createElement('button');
-    more.type = 'button';
+    var more = document.createElement('a');
     more.className = 'btn slide-more';
+    more.href = item.url;
     more.textContent = 'Ver más';
-    more.addEventListener('click', function () { open(item); });
     actions.appendChild(more);
     box.appendChild(actions);
 
@@ -786,90 +762,6 @@ function removeWithEmptyParents(el, root) {
     parent.remove();
     parent = up;
   }
-}
-
-// ---------- Nota ampliada (ventana con barra de desplazamiento al costado) ----------
-var notaModal = null;
-
-function openNota(item, onClose) {
-  if (!notaModal) notaModal = buildNotaModal();
-  var m = notaModal;
-  m.photo.hidden = !item.photo;
-  if (item.photo) m.photo.src = item.photo; else m.photo.removeAttribute('src');
-  m.title.textContent = item.title;
-  m.epigrafe.textContent = item.epigrafe || '';
-  m.epigrafe.hidden = !item.epigrafe;
-  m.body.innerHTML = item.body || '';
-  m.link.href = item.url;
-  m.onClose = onClose;
-  m.lastFocus = document.activeElement;
-
-  m.el.hidden = false;
-  document.documentElement.classList.add('nota-abierta');
-  m.scroll.scrollTop = 0;
-  m.close.focus();
-}
-
-function closeNota() {
-  var m = notaModal;
-  if (!m || m.el.hidden) return;
-  m.el.hidden = true;
-  document.documentElement.classList.remove('nota-abierta');
-  m.body.innerHTML = '';  // corta videos que estuvieran reproduciéndose
-  if (m.lastFocus && m.lastFocus.focus) m.lastFocus.focus();
-  if (m.onClose) m.onClose();
-}
-
-function buildNotaModal() {
-  var el = document.createElement('div');
-  el.className = 'nota-modal';
-  el.hidden = true;
-  el.innerHTML =
-    '<div class="nota-panel" role="dialog" aria-modal="true" aria-labelledby="nota-titulo">' +
-      '<button class="nota-close" type="button" aria-label="Cerrar la nota">' +
-        '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>' +
-      '</button>' +
-      '<div class="nota-scroll" tabindex="0">' +
-        '<img class="nota-foto" alt="">' +
-        '<div class="nota-content">' +
-        '<h2 class="nota-title" id="nota-titulo"></h2>' +
-        '<p class="nota-epigrafe"></p>' +
-        '<div class="nota-body"></div>' +
-        '<p class="nota-footer"><a class="btn btn-outline-dark nota-link" href="#">Abrir la nota en su página</a></p>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  document.body.appendChild(el);
-
-  var m = {
-    el: el,
-    scroll: el.querySelector('.nota-scroll'),
-    photo: el.querySelector('.nota-foto'),
-    title: el.querySelector('.nota-title'),
-    epigrafe: el.querySelector('.nota-epigrafe'),
-    body: el.querySelector('.nota-body'),
-    link: el.querySelector('.nota-link'),
-    close: el.querySelector('.nota-close')
-  };
-
-  m.close.addEventListener('click', closeNota);
-  // Tocar afuera de la nota la cierra
-  el.addEventListener('click', function (e) {
-    if (e.target === el) closeNota();
-  });
-  document.addEventListener('keydown', function (e) {
-    if (el.hidden) return;
-    if (e.key === 'Escape') closeNota();
-    // El foco queda dentro de la nota mientras está abierta
-    if (e.key === 'Tab') {
-      var items = el.querySelectorAll('button, a[href], iframe, [tabindex="0"]');
-      var first = items[0];
-      var last = items[items.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
-  return m;
 }
 
 function htmlToText(html) {
