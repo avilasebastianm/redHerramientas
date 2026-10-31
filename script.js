@@ -9,6 +9,8 @@ var BLOG_URL = /\.blogspot\.com$|redherramientas\.com$/.test(location.hostname)
 var CAROUSEL_LABEL = 'Carrusel'; // etiqueta de Blogger para elegir los posteos del carrusel
 var CAROUSEL_MAX = 6;
 var CAROUSEL_DELAY = 5000;      // ms entre diapositivas
+var NEWS_LABEL = 'Novedades';   // etiqueta de Blogger para las actividades de Novedades
+var NEWS_MAX = 3;
 
 // Si el blog no responde, se muestran estas diapositivas
 var FALLBACK_SLIDES = [
@@ -623,8 +625,46 @@ function setupCarousel() {
   });
 }
 
+// ---------- Novedades ----------
+var NEWS_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10z"/></svg>';
+
+function setupNews() {
+  var section = document.getElementById('novedades');
+  if (!section) return;
+  var list = section.querySelector('.news');
+  // La barra separadora de arriba solo se ve si hay novedades
+  var separator = section.previousElementSibling;
+  if (separator && !separator.classList.contains('separator')) separator = null;
+  if (separator) separator.hidden = true;
+
+  loadPosts(NEWS_LABEL, function (posts) {
+    if (!posts.length) return;
+    list.innerHTML = '';
+    posts.forEach(function (post) {
+      var card = document.createElement('article');
+      card.className = 'news-card';
+      var title = document.createElement('h3');
+      var link = document.createElement('a');
+      link.href = post.url;
+      link.textContent = post.title;
+      title.appendChild(link);
+      card.appendChild(title);
+      if (post.date) {
+        var date = document.createElement('p');
+        date.className = 'news-date';
+        date.innerHTML = NEWS_ICON;
+        date.appendChild(document.createTextNode(post.date));
+        card.appendChild(date);
+      }
+      list.appendChild(card);
+    });
+    section.hidden = false;
+    if (separator) separator.hidden = false;
+  }, NEWS_MAX);
+}
+
 // Lee el feed de Blogger (JSONP: funciona dentro de Blogger y desde cualquier dominio)
-function loadPosts(label, callback) {
+function loadPosts(label, callback, max) {
   var name = 'blogFeed' + Date.now() + Math.floor(Math.random() * 1000);
   var script = document.createElement('script');
   var timeout = setTimeout(function () { finish([]); }, 8000);
@@ -640,7 +680,7 @@ function loadPosts(label, callback) {
   script.onerror = function () { finish([]); };
   script.src = BLOG_URL + '/feeds/posts/default' +
     (label ? '/-/' + encodeURIComponent(label) : '') +
-    '?alt=json-in-script&max-results=' + CAROUSEL_MAX + '&callback=' + name;
+    '?alt=json-in-script&max-results=' + (max || CAROUSEL_MAX) + '&callback=' + name;
   document.head.appendChild(script);
 }
 
@@ -658,8 +698,10 @@ function parseFeed(data) {
     image = image.replace(/\/s\d+(-[a-z0-9-]+)?\//, '/w1200/').replace(/=s\d+(-[a-z0-9-]+)?$/, '=w1200');
 
     var parts = splitNota(html);
+    var published = entry.published ? new Date(entry.published.$t) : null;
     return {
       title: entry.title.$t,
+      date: published && !isNaN(published) ? published.toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' }) : '',
       epigrafe: parts.epigrafe,
       body: parts.body,
       photo: image,
@@ -907,6 +949,7 @@ setupSearch();
 setupFontSize();
 setupToTop();
 setupCarousel();
+setupNews();
 setupArticle();
 setupContactForm();
 setupCopyButtons();
